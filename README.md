@@ -2,7 +2,7 @@
 
 Biblioteca para uso geral em dispositivos desenvolvidos pelo SAIOT
 
-##Contem:
+## Contem:
 
 - Gerenciamento de *wifi* (WiFiManager);
 - Gerenciamento de JSONs (ArduinoJson);
@@ -15,8 +15,8 @@ Biblioteca para uso geral em dispositivos desenvolvidos pelo SAIOT
   - Dispositivos que precisam somente coletar dados momentâneos;
   - Dispositivos acumuladores que necessitam de controle de intensidade;
 
-##Como Usar:
-###Incluindo no projeto
+## Como Usar:
+### Incluindo no projeto
 
 1. Para usar basta, primeiramente, fazer o *download* do código, extrair e colar na pasta de bibliotecas do seu projeto;
 
@@ -27,7 +27,7 @@ include "SAIOTDevice.h"
 
 SAIOTDevice newDevice;
 ```
-###Configurando
+### Configurando
 Uma vez incluida no projeto, a biblioteca facilitará várias etapas do seu projeto. Aproveitando o objeto exemplo criado no ítem anterior temos os seguintes comandos para:
 
 #### Iniciar o Wifi
@@ -37,7 +37,7 @@ newDevice.startWifi();
 Caso seja a primeira conexão, o dispositivo entrará no modo AP. Para conectar, basta então, acessar a rede gerada pelo microcontrolador e configurá-la. No mais, o dispositivo tentará se reconectar com a rede salva anteriormente.
 
 
-##Limitações e futuras melhorias:
+## Limitações e futuras melhorias:
 
 - Protocolo HTTP ainda não implementado;
 - Protocolo MQTT parcialmente implementado;
