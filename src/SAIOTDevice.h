@@ -39,10 +39,10 @@ class SAIOTDevice{
         InstantData InstantDevice;
     public:
         void setDevice(deviceType device);
+        void startWifi();
         void startWSConnection(String host, String port);
         //void startHTTPConnection(String host, String port);
         //void startMQTTConnection(String host, String port);
-        void startWifi();
         void deviceHandle();
 };
 
