@@ -34,7 +34,7 @@ Uma vez incluida, a biblioteca facilitará várias etapas do seu projeto. Aprove
 ```c++
 newDevice.startWifi();
 ```
-Caso seja a primeira conexão, o dispositivo entrará no modo AP. Para conectar, basta então, acessar a rede gerada pelo microcontrolador e configurá-la. No mais, o dispositivo tentará se reconectar com a rede salva anteriormente.
+Caso seja a primeira conexão, o dispositivo entrará no modo AP. Para conectar basta, então, acessar a rede gerada pelo microcontrolador e configurá-la. No mais, o dispositivo tentará se reconectar com a rede salva anteriormente.
 
 
 ## Limitações e futuras melhorias:
