@@ -8,8 +8,8 @@ Biblioteca para uso geral em dispositivos desenvolvidos pelo SAIOT
 - Gerenciamento de JSONs (ArduinoJson);
 - Diferentes protocolos:
   - Websocket (SocketIOClient);
-  - MQTT (pubsubclient) **ver Limitações**;
-  - HTTP **ver Limitações**;
+  - MQTT (pubsubclient) (**ver Limitações**);
+  - HTTP (**ver Limitações**);
 - Gerenciamento de dados dos dispositivos de acordo com o tipo, sendo esses:
   - Dispositivos que necessitam acumular dados coletados;
   - Dispositivos que precisam somente coletar dados momentâneos;
@@ -28,7 +28,7 @@ include "SAIOTDevice.h"
 SAIOTDevice newDevice;
 ```
 ### Configurando
-Uma vez incluida no projeto, a biblioteca facilitará várias etapas do seu projeto. Aproveitando o objeto exemplo criado no ítem anterior temos os seguintes comandos para:
+Uma vez incluida, a biblioteca facilitará várias etapas do seu projeto. Aproveitando o objeto exemplo criado no ítem anterior temos os seguintes comandos para:
 
 #### Iniciar o Wifi
 ```c++
