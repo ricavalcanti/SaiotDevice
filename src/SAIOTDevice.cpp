@@ -1,11 +1,18 @@
-#include <Arduino.h>
 #include "SAIOTDevice.h"
 
-void SAIOTDevice::setDevice()[
+void SAIOTDevice::setDevice(deviceType device){
+	if(device === accum){
+
+	}else if (device === intens){
+
+	}else if (device === intens){
+
+	}else{
+		Serial.print(F("[SAIOT] ERROR! invalid device type"));
+	}
 	
-	
-	socket.on("eventoPadraoOn", dataVolta);
-]
+	//socket.on("eventoPadraoOn", dataVolta);
+}
 
 void SAIOTDevice::startWifi(){
 	//Uncoment to always open mode AP
@@ -16,6 +23,8 @@ void SAIOTDevice::startWifi(){
 }
 
 void SAIOTDevice::startWSConnection(String host, String port){
+	protocol = ws;
+
 	if (!socket.connect(host, port)) {
 		Serial.println(F("[SAIOT] connection device-server failed"));
 		return;
@@ -26,5 +35,11 @@ void SAIOTDevice::startWSConnection(String host, String port){
 }
 
 void deviceHandle(){
-	socket.emit("eventoPadrao", data);
+	if (protocol === ws){
+		client.monitor();
+	}else if (protocol === mqtt){
+		 client.loop();
+	}/*else{ 
+		implementar http
+	}*/
 }

@@ -1,27 +1,44 @@
 #ifndef SAIOTDevice_h
 #define SAIOTDevice_h
 
-#include "ArduinoJson.h"
-#include "SocketIOClient.h"
+#include <Arduino.h>
 #include "WifiManager.h"
+#include "ArduinoJson.h"
 
+#include "SocketIOClient.h"
+#include "PubSubClient.h"
 
-//COMO SOH ATIVAR O .H DO DISPOSITIVO ESPECIFICO?
+#include "DeviceData.h"
+//Additional libs for each type of device
 #include "AccumData.h"
 #include "IntensityDevice.h"
 #include "InstantData.h"
 
+enum deviceType{
+    "accum",
+    "intens",
+    "instant",
+};
+
+enum communicationType{
+    "ws",
+    "mqtt",
+    "http",
+};
+
 class SAIOTDevice{
     private:
-        SocketIOClient client;
         WiFiManager wifi;
+        SocketIOClient client;
+        PubSubClient client(espClient);
+        communicationType protocol;
 
         //possiveis tipos de dispositivos
         AccumData AccumDevice;
         IntensityDevice IntDevice;
         InstantData InstantDevice;
     public:
-        void setDevice(String type);
+        void setDevice(deviceType device);
         void startWSConnection(String host, String port);
         //void startHTTPConnection(String host, String port);
         //void startMQTTConnection(String host, String port);
