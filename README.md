@@ -2,7 +2,7 @@
 
 Biblioteca para uso geral em dispositivos desenvolvidos pelo SAIOT
 
-## Contem:
+## Contém:
 
 - Gerenciamento de *wifi* (WiFiManager);
 - Gerenciamento de JSONs (ArduinoJson);
