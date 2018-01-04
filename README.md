@@ -8,7 +8,7 @@ Biblioteca para uso geral em dispositivos desenvolvidos pelo SAIOT
 - Gerenciamento de JSONs (ArduinoJson);
 - Diferentes protocolos:
   - Websocket (SocketIOClient);
-  - MQTT (pubsubclient) ([**ver Limitações**] (https://github.com/daniellycosta/SAIOTDevice#limitações-e-futuras-melhorias));
+  - MQTT (pubsubclient) ([**ver Limitações**](https://github.com/daniellycosta/SAIOTDevice#limitações-e-futuras-melhorias));
   - HTTP ([**ver Limitações**](https://github.com/daniellycosta/SAIOTDevice#limitações-e-futuras-melhorias));
 - Gerenciamento de dados dos dispositivos de acordo com o tipo, sendo esses:
   - Dispositivos que necessitam acumular dados coletados (acumuladores);
