@@ -15,15 +15,15 @@
 #include "InstantData.h"
 
 enum deviceType{
-    "accum",
-    "intens",
-    "instant",
+    accum,
+    intens,
+    instant,
 };
 
-enum communicationType{
-    "ws",
-    "mqtt",
-    "http",
+enum protocolType{
+    ws,
+    mqtt,
+    http,
 };
 
 class SAIOTDevice{
@@ -31,18 +31,15 @@ class SAIOTDevice{
         WiFiManager wifi;
         SocketIOClient client;
         PubSubClient client(espClient);
-        communicationType protocol;
+        protocolType protocol;
 
-        //possiveis tipos de dispositivos
-        AccumData AccumDevice;
-        IntensityDevice IntDevice;
-        InstantData InstantDevice;
     public:
         void setDevice(deviceType device);
+        void setDeviceJson();
         void startWifi();
         void startWSConnection(String host, String port);
+        void startMQTTConnection(String host, String port);
         //void startHTTPConnection(String host, String port);
-        //void startMQTTConnection(String host, String port);
         void deviceHandle();
 };
 

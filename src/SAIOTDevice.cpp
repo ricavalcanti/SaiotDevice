@@ -1,11 +1,14 @@
 #include "SAIOTDevice.h"
 
-void SAIOTDevice::setDevice(deviceType device){
-	if(device === accum){
+void SAIOTDevice::setDevice(deviceType _device){
+	if(_device === accum){
+		AccumData device;
 
-	}else if (device === intens){
+	}else if (_device === intens){
+		IntensityDevice device;
 
-	}else if (device === intens){
+	}else if (_device === instant){
+		InstantData device;
 
 	}else{
 		Serial.print(F("[SAIOT] ERROR! invalid device type"));
@@ -34,7 +37,20 @@ void SAIOTDevice::startWSConnection(String host, String port){
 	Serial.flush();
 }
 
-void deviceHandle(){
+void SAIOTDevice::startMQTTConnection(String host, String port){
+	protocol = mqtt;
+	client.setServer(host, port);
+	if (!client.connected()) {
+		Serial.println(F("[SAIOT] connection device-server failed"));
+		return;
+  } else if (client.connected()){
+	  Serial.println(F("[SAIOT] connection device-server established"));
+  }
+  Serial.flush();
+  	//client.setCallback(callback);
+}
+
+void SAIOTDevice::deviceHandle(){
 	if (protocol === ws){
 		client.monitor();
 	}else if (protocol === mqtt){
@@ -43,3 +59,4 @@ void deviceHandle(){
 		implementar http
 	}*/
 }
+
