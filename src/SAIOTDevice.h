@@ -2,13 +2,12 @@
 #define SAIOTDevice_h
 
 #include <Arduino.h>
-#include "WifiManager.h"
+#include "WiFiManager.h"
 #include "ArduinoJson.h"
 
 #include "SocketIOClient.h"
 #include "PubSubClient.h"
 
-#include "DeviceData.h"
 //Additional libs for each type of device
 #include "AccumData.h"
 #include "IntensityDevice.h"
