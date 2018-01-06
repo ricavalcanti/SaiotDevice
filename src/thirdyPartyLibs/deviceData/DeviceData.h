@@ -35,10 +35,10 @@ public:
   String getDeviceIp(void);
   String getDateTime(void);
   String getActionAdress(void); //Action route
-  //Will get the bool communication type (1-synchronous and 0-asynchronous) and
+  //Will get the bool communication type (1-sync and 0-async) and
   //convert to a String
   String getCommType(void);
-  //Will get the bool State (1-On and 0-Off) and convert to a String
+  //Will get the bool State (1-on and 0-off) and convert to a String
   String getState(void);
 
   int getTimeout(void);
