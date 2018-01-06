@@ -46,7 +46,7 @@ newDevice.setDevice(intens); //para dispositivos que precisam somente coletar/en
 newDevice.setDevice(instant);// para dispositivos "instantâneos" que necessitam de controle de intensidade  
 ```
 ### Configurando nome dos eventos
-Antes de fazer conexão com o servidor, é necessário configurar o nome dos eventos onde as trocas de mensagem ocorrerão. Os métodos, nomes padrão e a função de cada evento se encontra descritos na tabela abaixo.
+**Antes de fazer** conexão com o servidor, é necessário configurar o nome dos eventos onde as trocas de mensagem ocorrerão. Os métodos, nomes padrões e a função de cada evento se encontra descritos na tabela abaixo.
 
 Método | Valor Padrão | Descrição
 ------ | ----------- | --------
