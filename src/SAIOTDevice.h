@@ -2,16 +2,16 @@
 #define SAIOTDevice_h
 
 #include <Arduino.h>
-#include "WiFiManager.h"
-#include "ArduinoJson.h"
+#include "thirdyPartyLibs/WiFiManager/WiFiManager.h"
+#include "thirdyPartyLibs/ArduinoJson/ArduinoJson.h"
 
-#include "SocketIOClient.h"
-#include "PubSubClient.h"
+#include "thirdyPartyLibs/SocketIOClient/SocketIOClient.h"
+#include "thirdyPartyLibs/pubsubclient/src/PubSubClient.h"
 
 //Additional libs for each type of device
-#include "AccumData.h"
-#include "IntensityDevice.h"
-#include "InstantData.h"
+#include "thirdyPartyLibs/deviceData/AccumData.h"
+#include "thirdyPartyLibs/deviceData/IntensityDevice.h"
+#include "thirdyPartyLibs/deviceData/InstantData.h"
 
 enum deviceType{
     accum,
@@ -29,7 +29,7 @@ class SAIOTDevice{
     private:
         WiFiManager wifi;
         SocketIOClient client;
-        PubSubClient client(espClient);
+        //PubSubClient client(espClient);
         protocolType protocol;
 
     public:
@@ -37,7 +37,7 @@ class SAIOTDevice{
         void setDeviceJson();
         void startWifi();
         void startWSConnection(String host, String port);
-        void startMQTTConnection(String host, String port);
+        //void startMQTTConnection(String host, String port);
         //void startHTTPConnection(String host, String port);
         void deviceHandle();
 };

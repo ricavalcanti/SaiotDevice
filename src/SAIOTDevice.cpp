@@ -1,13 +1,13 @@
 #include "SAIOTDevice.h"
 
 void SAIOTDevice::setDevice(deviceType _device){
-	if(_device === accum){
+	if(_device == accum){
 		AccumData device;
 
-	}else if (_device === intens){
+	}else if (_device == intens){
 		IntensityDevice device;
 
-	}else if (_device === instant){
+	}else if (_device == instant){
 		InstantData device;
 
 	}else{
@@ -28,16 +28,16 @@ void SAIOTDevice::startWifi(){
 void SAIOTDevice::startWSConnection(String host, String port){
 	protocol = ws;
 
-	if (!socket.connect(host, port)) {
+	if (!client.connect(host, port)) {
 		Serial.println(F("[SAIOT] connection device-server failed"));
 		return;
-	} else if (socket.connected()) {
+	} else if (client.connected()) {
 		Serial.println(F("[SAIOT] connection device-server established"));
 	}
 	Serial.flush();
 }
 
-void SAIOTDevice::startMQTTConnection(String host, String port){
+/*void SAIOTDevice::startMQTTConnection(String host, String port){
 	protocol = mqtt;
 	client.setServer(host, port);
 	if (!client.connected()) {
@@ -48,12 +48,12 @@ void SAIOTDevice::startMQTTConnection(String host, String port){
   }
   Serial.flush();
   	//client.setCallback(callback);
-}
+}*/
 
 void SAIOTDevice::deviceHandle(){
-	if (protocol === ws){
+	if (protocol == ws){
 		client.monitor();
-	}else if (protocol === mqtt){
+	}else if (protocol == mqtt){
 		 client.loop();
 	}/*else{ 
 		implementar http
