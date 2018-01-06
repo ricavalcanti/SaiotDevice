@@ -38,33 +38,6 @@ void setOnOffEvent(String onOffEventName){
 	onOffEvent = onOffEventName;
 }
 
-void SAIOTDevice::startWSConnection(String host, String port){
-	protocol = ws;
-
-	client.on(receivingEvent, /*FUNCAO*/)
-
-		if (!client.connect(host, port)){
-		Serial.println(F("[SAIOT] connection device-server failed"));
-		return;
-	}else if (client.connected()){
-		Serial.println(F("[SAIOT] connection device-server established"));
-	}
-	Serial.flush();
-}
-
-/*void SAIOTDevice::startMQTTConnection(String host, String port){
-	protocol = mqtt;
-	client.setServer(host, port);
-	if (!client.connected()) {
-		Serial.println(F("[SAIOT] connection device-server failed"));
-		return;
-  } else if (client.connected()){
-	  Serial.println(F("[SAIOT] connection device-server established"));
-  }
-  Serial.flush();
-  	//client.setCallback(callback);
-}*/
-
 void SAIOTDevice::deviceHandle(){
 	if (protocol == ws){
 		client.monitor();
@@ -208,3 +181,32 @@ void SAIOTDevice::changeDeviceConfig(String status){
 	  socket.emit(sendDeviceStatus, getDeviceJson(device));
   }
 }
+
+void SAIOTDevice::startWSConnection(String host, String port){
+	protocol = ws;
+
+	client.on(receivingEvent,sendDeviceStatus(String status));
+	client.on(receivingConfigEvent,changeDeviceConfig(String status));
+	client.on(onOffEvent,turnOnOff(String status));
+
+		if (!client.connect(host, port)){
+		Serial.println(F("[SAIOT] connection device-server failed"));
+		return;
+	}else if (client.connected()){
+		Serial.println(F("[SAIOT] connection device-server established"));
+	}
+	Serial.flush();
+}
+
+/*void SAIOTDevice::startMQTTConnection(String host, String port){
+	protocol = mqtt;
+	client.setServer(host, port);
+	if (!client.connected()) {
+		Serial.println(F("[SAIOT] connection device-server failed"));
+		return;
+  } else if (client.connected()){
+	  Serial.println(F("[SAIOT] connection device-server established"));
+  }
+  Serial.flush();
+  	//client.setCallback(callback);
+}*/

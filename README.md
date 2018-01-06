@@ -45,6 +45,16 @@ newDevice.setDevice(accum); //para dispositivos que necessitam acumular dados co
 newDevice.setDevice(intens); //para dispositivos que precisam somente coletar/enviar dados momentâneos
 newDevice.setDevice(instant);// para dispositivos "instantâneos" que necessitam de controle de intensidade  
 ```
+### Configurando nome dos eventos
+Antes de fazer conexão com o servidor, é necessário configurar o nome dos eventos onde as trocas de mensagem ocorrerão. Os métodos, nomes padrão e a função de cada evento se encontra descritos na tabela abaixo.
+
+Método | Valor Padrão | Descrição
+------ | ----------- | --------
+```newDevice.setSendingEvent("insiraNomeEscolhido");``` | device_send | Evento por onde o JSON de configurações é enviado para o server.
+```newDevice.setReceivingEvent("insiraNomeEscolhido");``` | device_on | Evento que ativa o envio do JSON de configurações.
+```newDevice.setReceivingConfigEvent("insiraNomeEscolhido");``` | device_config | Evento por onde o JSON de configurações é recebido do server.
+```newDevice.setOnOffEvent("insiraNomeEscolhido");``` | device_onOff | Evento por onde o dispositivo recebe o comando de ligar/desligar.
+
 ### Iniciando conexão com o servidor
 A biblioteca possui suporte para os protocolos Websocket,~~MQTT e HTTP~~ e para utilizar um desses é só utlizar **um dos** trechos de código abaixo:
 

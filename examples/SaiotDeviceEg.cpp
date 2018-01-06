@@ -9,6 +9,12 @@ SAIOTDevice hidrometro;
 void setup(){
     hidrometro.startWifi();
     hidrometro.setDevice(accum);
+
+    hidrometro.setSendingEvent("Status");
+    hidrometro.serReceivingEvent("OnEvent")
+    hidrometro.setReceivingConfigEvent("Config");
+    hidrometro.setOnOffEvent("On_Off");
+
     hidrometro.startWSConnection(HOST,PORT);
 
 }
