@@ -1,4 +1,4 @@
-# Biblioteca SAIOTDevice
+# Biblioteca SaiotDevice
 
 Biblioteca para uso geral em dispositivos desenvolvidos pelo SAIOT
 
@@ -24,9 +24,9 @@ Biblioteca para uso geral em dispositivos desenvolvidos pelo SAIOT
 2. Em seguide, deve-se incluí-la em seu projeto e criar um objeto conforme exemplificado abaixo;
 
 ```c++
-include "SAIOTDevice.h"
+include "SaiotDevice.h"
 
-SAIOTDevice newDevice;
+SaiotDevice newDevice;
 ```
 ### Configurando
 Uma vez incluida, a biblioteca facilitará várias etapas do seu projeto. Aproveitando o objeto exemplo criado no ítem anterior temos os seguintes comandos para:
