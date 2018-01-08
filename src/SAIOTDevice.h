@@ -1,5 +1,5 @@
-#ifndef SAIOTDevice_h
-#define SAIOTDevice_h
+#ifndef SaiotDevice_h
+#define SaiotDevice_h
 
 #include <Arduino.h>
 #include "thirdyPartyLibs/WiFiManager/WiFiManager.h"
@@ -27,7 +27,7 @@ enum protocolType{
     http,
 };
 
-class SAIOTDevice{
+class SaiotDevice{
     private:
         WiFiManager wifi;
         protocolType protocol;
