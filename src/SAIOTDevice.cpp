@@ -1,6 +1,6 @@
-#include "SAIOTDevice.h"
+#include "SaiotDevice.h"
 
-void SAIOTDevice::setDevice(deviceType _device){
+void SaiotDevice::setDevice(deviceType _device){
 	if (_device == accum){
 		type = accum;
 		AccumData device;
@@ -15,7 +15,7 @@ void SAIOTDevice::setDevice(deviceType _device){
 	}
 }
 
-void SAIOTDevice::startWifi(){
+void SaiotDevice::startWifi(){
 	//Uncoment to always open mode AP
 	//wifi.startConfigPortal();
 	wifi.autoConnect();
@@ -23,22 +23,22 @@ void SAIOTDevice::startWifi(){
 	Serial.println(F(WiFi.SSID()));
 }
 
-void SAIOTDevice::setSendingEvent(String sendingEventName){
+void SaiotDevice::setSendingEvent(String sendingEventName){
 	sendingEvent = sendingEventName;
 }
 
-void SAIOTDevice::setReceivingEvent(String receivingEventName){
+void SaiotDevice::setReceivingEvent(String receivingEventName){
 	receivingEvent = receivingEventName;
 }
 
-void setReceivingConfigEvent(String receivingConfigEventName){
+void SaiotDevice::setReceivingConfigEvent(String receivingConfigEventName){
 	receivingConfigEvent = receivingConfigEventName;
 }
-void setOnOffEvent(String onOffEventName){
+void SaiotDevice::setOnOffEvent(String onOffEventName){
 	onOffEvent = onOffEventName;
 }
 
-void SAIOTDevice::deviceHandle(){
+void SaiotDevice::deviceHandle(){
 	if (protocol == ws){
 		client.monitor();
 	} else if (protocol == mqtt){
@@ -48,7 +48,7 @@ void SAIOTDevice::deviceHandle(){
 	}*/
 }
 
-String SAIOTDevice::getDeviceJson(AccumData _device){
+String SaiotDevice::getDeviceJson(AccumData _device){
 	StaticJsonBuffer<MAX_JSON_SIZE> jsonBuffer;
 	JsonObject &clientData = jsonBuffer.createObject();
 
@@ -70,7 +70,7 @@ String SAIOTDevice::getDeviceJson(AccumData _device){
 	return devStatus;
 }
 
-String SAIOTDevice::getDeviceJson(IntensityDevice _device){
+String SaiotDevice::getDeviceJson(IntensityDevice _device){
 	StaticJsonBuffer<MAX_JSON_SIZE> jsonBuffer;
 	JsonObject &clientData = jsonBuffer.createObject();
 
@@ -93,7 +93,7 @@ String SAIOTDevice::getDeviceJson(IntensityDevice _device){
 	return devStatus;
 }
 
-String SAIOTDevice::getDeviceJson(InstantData _device){
+String SaiotDevice::getDeviceJson(InstantData _device){
 	StaticJsonBuffer<MAX_JSON_SIZE> jsonBuffer;
 	JsonObject &clientData = jsonBuffer.createObject();
 
@@ -115,7 +115,7 @@ String SAIOTDevice::getDeviceJson(InstantData _device){
 	return devStatus;
 }
 
-void SAIOTDevice::sendDeviceStatus(String status){
+void SaiotDevice::sendDeviceStatus(String status){
 	if(protocol == ws){
 		client.emit(sendingStatusEvent, getDeviceJson());
 	}/*else if (protocol == mqtt){
@@ -126,7 +126,7 @@ void SAIOTDevice::sendDeviceStatus(String status){
 	
 }
 
-void SAIOTDevice::turnOnOff(String status){
+void SaiotDevice::turnOnOff(String status){
 	if(device.getState() == "off"){
     	device.setState(1);
     	socket.emit(sendDeviceStatus, getDeviceJson());
@@ -137,7 +137,7 @@ void SAIOTDevice::turnOnOff(String status){
 	}
 }
 
-void SAIOTDevice::changeDeviceConfig(String status){
+void SaiotDevice::changeDeviceConfig(String status){
 	/*
 	//Receiving Debug
 	Serial.print(F("[DEBUG] Recebido do Server: "));
@@ -182,7 +182,7 @@ void SAIOTDevice::changeDeviceConfig(String status){
   }
 }
 
-void SAIOTDevice::startWSConnection(String host, String port){
+void SaiotDevice::startWSConnection(String host, String port){
 	protocol = ws;
 
 	client.on(receivingEvent,sendDeviceStatus(String status));
@@ -198,7 +198,7 @@ void SAIOTDevice::startWSConnection(String host, String port){
 	Serial.flush();
 }
 
-/*void SAIOTDevice::startMQTTConnection(String host, String port){
+/*void SaiotDevice::startMQTTConnection(String host, String port){
 	protocol = mqtt;
 	client.setServer(host, port);
 	if (!client.connected()) {
