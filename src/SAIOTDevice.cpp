@@ -3,13 +3,12 @@
 void SaiotDevice::setDevice(deviceType _device){
 	if (_device == accum){
 		type = accum;
-		AccumData device;
 	}else if (_device == intens){
 		type = intens;
-		IntensityDevice device;
+		
 	}else if (_device == instant){
 		type = instant;
-		InstantData device;
+		
 	}else{
 		Serial.print(F("[SAIOT] ERROR! invalid device type"));
 	}

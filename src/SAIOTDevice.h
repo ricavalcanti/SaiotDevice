@@ -33,6 +33,10 @@ class SaiotDevice{
         protocolType protocol;
         deviceType type;
 
+        AccumData accumDevice;
+        IntensityDevice intDevice;
+        InstantData instDevice;
+
         SocketIOClient client;
         //PubSubClient client(espClient);
 
