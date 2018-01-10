@@ -4,11 +4,13 @@
 #include <Arduino.h>
 #include "DeviceData.h"
 
-template <class Type> class InstantData: public DeviceData{
+class InstantData : public DeviceData
+{
 private:
-Type value;
+  double value;
+
 public:
-  void setValue(Type _value);
-  Type getValue(void);
+  void setValue(double _value);
+  double getValue(void);
 };
 #endif

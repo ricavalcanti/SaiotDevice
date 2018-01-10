@@ -15,60 +15,63 @@
 
 #define MAX_JSON_SIZE 400
 
-enum deviceType{
+enum deviceType
+{
     accum,
     intens,
     instant,
 };
 
-enum protocolType{
+enum protocolType
+{
     ws,
     mqtt,
     http,
 };
 
-class SaiotDevice{
-    private:
-        WiFiManager wifi;
-        protocolType protocol;
-        deviceType type;
+class SaiotDevice
+{
+  private:
+    WiFiManager wifi;
+    protocolType protocol;
+    deviceType type;
 
-        AccumData accumDevice;
-        IntensityDevice intDevice;
-        InstantData instDevice;
+    AccumData accumDevice;
+    IntensityDevice intDevice;
+    InstantData instDevice;
 
-        SocketIOClient client;
-        //PubSubClient client(espClient);
+    SocketIOClient client;
+    //PubSubClient client(espClient);
 
-        char devStatus[MAX_JSON_SIZE];
+    char devStatus[MAX_JSON_SIZE];
 
-        String sendingStatusEvent = "device_send";
-        String receivingStatusEvent = "device_on";
-        String receivingConfigEvent = "device_config" ;
-        String onOffEvent = "device_onOff" ;
+    String sendingStatusEvent = "device_send";
+    String receivingStatusEvent = "device_on";
+    String receivingConfigEvent = "device_config";
+    String onOffEvent = "device_onOff";
 
-    public:
-        void setDevice(deviceType device);
-        void startWifi();
+  public:
+    void setDevice(deviceType device);
+    void startWifi();
 
-        void startWSConnection(String host, String port);
-        //void startMQTTConnection(String host, String port);
-        //void startHTTPConnection(String host, String port);
+    void startWSConnection(String host, int port);
+    //void startMQTTConnection(String host, String port);
+    //void startHTTPConnection(String host, String port);
 
-        void setSendingEvent(String sendingEventName);
-        void setReceivingEvent(String receivingEventName);
-        void setReceivingConfigEvent(String receivingConfigEventName);
-        void setOnOffEvent(String onOffEventName);
+    void setSendingEvent(String sendingEventName);
+    void setReceivingEvent(String receivingEventName);
+    void setReceivingConfigEvent(String receivingConfigEventName);
+    void setOnOffEvent(String onOffEventName);
 
-        void deviceHandle();
+    void deviceHandle();
 
-        String getDeviceJson(AccumData _device);
-        String getDeviceJson(IntensityDevice _device);
-        String getDeviceJson(InstantData _device);
+    String getDeviceJson(AccumData _device);
+    String getDeviceJson(IntensityDevice _device);
+    String getDeviceJson(InstantData _device);
 
-        void sendDeviceStatus(String status);
-        void turnOnOff(String status);
-        void changeDeviceConfig(String status);
+    void sendDeviceStatus(String status);
+    void turnOnOff(String status);
+    void changeDeviceConfig(String status);
 };
 
 #endif

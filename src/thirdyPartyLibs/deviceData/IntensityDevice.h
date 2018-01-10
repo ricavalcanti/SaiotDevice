@@ -2,11 +2,14 @@
 #define IntensityDevice_h
 
 #include <Arduino.h>
+#include "DeviceData.h"
 #include "InstantData.h"
 
-class IntensityDevice: public InstantData{
+class IntensityDevice : public InstantData
+{
 private:
-double intensity;
+  double intensity;
+
 public:
   void setIntensity(float _intensity);
   float getIntensity(void);
