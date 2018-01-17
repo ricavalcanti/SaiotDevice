@@ -184,29 +184,56 @@ void SaiotDevice::changeDeviceConfig(String status)
 		Serial.println(F("parseObject() failed"));
 		return;
 	}
-
-	device.setTag(newConfig["tag"]);
-	device.setDescription(newConfig["description"]);
-	device.setTimeout(newConfig["timeout"]);
-	device.setDeadBand(newConfig["deadBand"]);
-
-	if (newConfig["communicationType"] == "sync")
+	/////////////////////////////////////////////////////////////////////
+	/* VER COMO MELHORAR ESSE TRECHO DE CODIGO (RETIRAR ESSES IF/ELSE)*/
+	////////////////////////////////////////////////////////////////////
+	if (type == accum)
 	{
-		device.setCommType(1);
+		AccumData _device;
+	}
+	else if (type == intens)
+	{
+		IntensityDevice _device;
+		_device.setIntensity(newConfig["intensity"]);
 	}
 	else
 	{
-		device.setCommType(0);
+		InstantData _device;
 	}
 
-	if (type == intens)
+	_device.setTag(newConfig["tag"]);
+	_device.setDescription(newConfig["description"]);
+	_device.setTimeout(newConfig["timeout"]);
+	_device.setDeadBand(newConfig["deadBand"]);
+
+	if (newConfig["communicationType"] == "sync")
 	{
-		device.setIntensity(newConfig["intensity"]);
+		_device.setCommType(1);
 	}
+	else
+	{
+		_device.setCommType(0);
+	}
+
+	if (type == accum)
+	{
+		accumDevice = _device
+	}
+	else if (type == intens)
+	{
+		intDevice = _device;
+	}
+	else
+	{
+		instDevice = _device;
+	}
+	///////////////////////////////
+	/* FIM DO TRECHO EM QUESTAO*/
+	//////////////////////////////
 
 	if (protocol == ws)
 	{
-		socket.emit(sendDeviceStatus, getDeviceJson(device));
+		socket.emit(sendDeviceStatus, getDeviceJson(_device));
 	}
 }
 
