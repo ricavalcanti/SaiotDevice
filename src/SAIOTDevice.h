@@ -29,7 +29,7 @@ enum protocolType
     http,
 };
 
-typedef void (*behaviorChangeFunction)(String deviceJson);
+typedef void (*behaviorChangeFunction)(int deboucingTime, int port, String deviceJson);
 
 class SaiotDevice
 {
@@ -52,6 +52,8 @@ class SaiotDevice
     String receivingConfigEvent = "device_config";
     String onOffEvent = "device_onOff";
 
+    behaviorChangeFunction = defaultBehaviorfunction;
+
   public:
     void setDevice(deviceType device);
     void startWifi();
@@ -61,7 +63,8 @@ class SaiotDevice
     void setReceivingConfigEvent(String receivingConfigEventName);
     void setOnOffEvent(String onOffEventName);
 
-    void triggerDeviceBehavior(behaviorChangeFunction function, String deviceStatusJson);
+    void setDeviceBehavior(behaviorChangeFunction _function);
+    void defaultBehaviorfunction(int deboucingTime, int port, String deviceJson);
 
     void startWSConnection(String host, int port);
     //void startMQTTConnection(String host, String port);

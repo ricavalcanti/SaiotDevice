@@ -81,9 +81,17 @@ void SaiotDevice::startWSConnection(String host, int port)
   	//client.setCallback(callback);
 }*/
 
-void SaiotDevice::triggerDeviceBehavior(behaviorChangeFunction function, String deviceStatusJson)
+void SaiotDevice::setDeviceBehavior(functionPointer _function)
 {
-	function(deviceStatusJson);
+	behaviorChangeFunction = _function;
+	
+}
+
+void SaiotDevice::defaultBehaviorfunction(int deboucingTime, int port, String deviceJson)
+{
+	//////////////////////////
+	/*INSERIR FUNCAO PADRAO*/
+	////////////////////////
 }
 
 void SaiotDevice::deviceHandle()
