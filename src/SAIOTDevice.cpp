@@ -48,6 +48,44 @@ void SaiotDevice::setOnOffEvent(String onOffEventName)
 	onOffEvent = onOffEventName;
 }
 
+void SaiotDevice::startWSConnection(String host, int port)
+{
+	protocol = ws;
+
+	client.on(receivingEvent, sendDeviceStatus(String status));
+	client.on(receivingConfigEvent, changeDeviceConfig(String status));
+	client.on(onOffEvent, turnOnOff(String status));
+
+	if (!client.connect(host, port))
+	{
+		Serial.println(F("[SAIOT] connection device-server failed"));
+		return;
+	}
+	else if (client.connected())
+	{
+		Serial.println(F("[SAIOT] connection device-server established"));
+	}
+	Serial.flush();
+}
+
+/*void SaiotDevice::startMQTTConnection(String host, String port){
+	protocol = mqtt;
+	client.setServer(host, port);
+	if (!client.connected()) {
+		Serial.println(F("[SAIOT] connection device-server failed"));
+		return;
+  } else if (client.connected()){
+	  Serial.println(F("[SAIOT] connection device-server established"));
+  }
+  Serial.flush();
+  	//client.setCallback(callback);
+}*/
+
+void SaiotDevice::triggerDeviceBehavior(behaviorChangeFunction function, String deviceStatusJson)
+{
+	function(deviceStatusJson);
+}
+
 void SaiotDevice::deviceHandle()
 {
 	if (protocol == ws)
@@ -236,36 +274,3 @@ void SaiotDevice::changeDeviceConfig(String status)
 		socket.emit(sendDeviceStatus, getDeviceJson(_device));
 	}
 }
-
-void SaiotDevice::startWSConnection(String host, int port)
-{
-	protocol = ws;
-
-	client.on(receivingEvent, sendDeviceStatus(String status));
-	client.on(receivingConfigEvent, changeDeviceConfig(String status));
-	client.on(onOffEvent, turnOnOff(String status));
-
-	if (!client.connect(host, port))
-	{
-		Serial.println(F("[SAIOT] connection device-server failed"));
-		return;
-	}
-	else if (client.connected())
-	{
-		Serial.println(F("[SAIOT] connection device-server established"));
-	}
-	Serial.flush();
-}
-
-/*void SaiotDevice::startMQTTConnection(String host, String port){
-	protocol = mqtt;
-	client.setServer(host, port);
-	if (!client.connected()) {
-		Serial.println(F("[SAIOT] connection device-server failed"));
-		return;
-  } else if (client.connected()){
-	  Serial.println(F("[SAIOT] connection device-server established"));
-  }
-  Serial.flush();
-  	//client.setCallback(callback);
-}*/
