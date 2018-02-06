@@ -15,24 +15,21 @@
 
 #define MAX_JSON_SIZE 400
 
-enum deviceType
-{
+enum deviceType{
     accum,
     intens,
     instant,
 };
 
-enum protocolType
-{
+enum protocolType{
     ws,
     mqtt,
     http,
 };
 
-typedef void (*behaviorChangeFunction)(int deboucingTime, int port, String deviceJson);
+typedef void (*behaviorChangeFunction)(int timeout, int port, String deviceJson);
 
-class SaiotDevice
-{
+class SaiotDevice{
   private:
     WiFiManager wifi;
     protocolType protocol;
@@ -64,7 +61,7 @@ class SaiotDevice
     void setOnOffEvent(String onOffEventName);
 
     void setDeviceBehavior(behaviorChangeFunction _function);
-    void defaultBehaviorfunction(int deboucingTime, int port, String deviceJson);
+    void defaultBehaviorfunction(int timeout, int port, String deviceJson);
 
     void startWSConnection(String host, int port);
     //void startMQTTConnection(String host, String port);
@@ -79,6 +76,11 @@ class SaiotDevice
     void sendDeviceStatus(String status);
     void turnOnOff(String status);
     void changeDeviceConfig(String status);
+
+    //void interruptToRead(port, function1, function2, timeout)
+    //void interruptToRead(function1,timeout)
+    //void verify(function1)
+
 };
 
 #endif
