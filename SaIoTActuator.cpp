@@ -24,35 +24,31 @@
     return label;
   }
 
-  void SaIoTActuator::setInterval(int _min,int _step,int _max){
+  void SaIoTActuator::setInterval(double _min,double _step,double _max){
     min = _min;
     step = _step;
     max = _max;
   }
 
-  void SaIoTActuator::setMin(int _min){
+  void SaIoTActuator::setMin(double _min){
      min = _min;
   }
-  void SaIoTActuator::setMax(int _max){
+  void SaIoTActuator::setMax(double _max){
     max = _max;
   }
 
-  void SaIoTActuator::setStep(int _step){
+  void SaIoTActuator::setStep(double _step){
     step = _step;
   }
 
-  int SaIoTActuator::getMin(void){
+  double SaIoTActuator::getMin(void){
     return min;
   }
 
-  int SaIoTActuator::getMax(void){
+  double SaIoTActuator::getMax(void){
     return max;
   }
 
-  int SaIoTActuator::getStep(void){
+  double SaIoTActuator::getStep(void){
     return step;
-  }
-
-  void SaIoTActuator::act(void (*actionToBeExec)(String), String config){
-    actionToBeExec(config); 
   }

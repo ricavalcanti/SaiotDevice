@@ -3,10 +3,11 @@
 
 #include<Arduino.h>
 
-class SaIoTSensor{
+class SaIoTActuator{
     private:
       String key = "Not setted", type = "Not setted", label = "Not setted";
       double min=0,max=1,step=0.01;
+      void *(actionToBeExec)(String);
     public:
         void setKey(String _key);
         String getKey(void);
@@ -18,13 +19,14 @@ class SaIoTSensor{
         String getLabel(void);
 
         void setInterval(double _min,double _step,double _max);
+        
         void setMin(double _min);
-        void setMax(double _max);
-        void setStep(double _step);
         double getMin(void);
+        
+        void setMax(double _max);
         double getMax(void);
+        
+        void setStep(double _step);
         double getStep(void);
-
-        void act(void (*actionToBeExec)(String));
 };
 #endif
