@@ -52,3 +52,7 @@
   int SaIoTActuator::getStep(void){
     return step;
   }
+
+  void SaIoTActuator::act(void (*actionToBeExec)(String), String config){
+    actionToBeExec(config); 
+  }

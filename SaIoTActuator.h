@@ -6,7 +6,7 @@
 class SaIoTSensor{
     private:
       String key = "Not setted", type = "Not setted", label = "Not setted";
-      int min,max,step;
+      double min=0,max=1,step=0.01;
     public:
         void setKey(String _key);
         String getKey(void);
@@ -17,14 +17,14 @@ class SaIoTSensor{
         void setLabel(String _label);
         String getLabel(void);
 
-        void setInterval(int _min,int _step,int _max);
-        void setMin(int _min);
-        void setMax(int _max);
-        void setStep(int _step);
-        int getMin(void);
-        int getMax(void);
-        int getStep(void);
+        void setInterval(double _min,double _step,double _max);
+        void setMin(double _min);
+        void setMax(double _max);
+        void setStep(double _step);
+        double getMin(void);
+        double getMax(void);
+        double getStep(void);
 
-        void act(/*function*/);
+        void act(void (*actionToBeExec)(String));
 };
 #endif
