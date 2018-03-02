@@ -1,5 +1,4 @@
-#include<SaIoTDeviceLib.h>
-
+#include"SaIoTDeviceLib.h"
 
 void SaIoTDeviceLib::start(int boundRate){
 	Serial.begin(boundRate);

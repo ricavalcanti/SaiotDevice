@@ -10,6 +10,9 @@ class SaIoTSensor{
         double valor;
         bool isAcumm = false, isSync = true, isDigital=true;
     private:
+        /****************************************************************
+         * Sensor JSON Functions
+        ****************************************************************/
         void setKey(String _key);
         String getKey(void);
 
@@ -36,7 +39,13 @@ class SaIoTSensor{
 
         void setUnit(String _unit);
         String getUnit(void);
-        
+
+        /****************************************************************
+         * Sensor Reading Functions: Verification and interruptions
+        ****************************************************************/
+        void verify(/*function as a parameter*/);
+        void interruptToRead(/*String port,function,change*/); //Timeout já setado no JSON;
+        void interruptToRead(/*function, int time*/);
 };
 
 #endif
