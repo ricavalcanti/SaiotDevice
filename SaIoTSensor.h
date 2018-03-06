@@ -44,8 +44,8 @@ class SaIoTSensor{
          * Sensor Reading Functions: Verification and interruptions
         ****************************************************************/
         void verify(/*function as a parameter*/);
-        void interruptToRead(/*String port,function,change*/); //Timeout já setado no JSON;
-        void interruptToRead(/*function, int time*/);
+        // void interruptToRead(/*String port,function,change*/); //Timeout já setado no JSON;
+        // void interruptToRead(/*function, int time*/);
 };
 
 #endif

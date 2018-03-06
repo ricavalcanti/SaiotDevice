@@ -2,18 +2,19 @@
 #define SaIoTDeviceLib_h
 
 #include <Arduino.h>
-#include <WiFiManager.h>
-#include<SocketIOClient.h>
-
+// #include <WiFiManager.h>
+// #include<SocketIOClient.h>
+// #include <ArduinoJson.h>
 //TENTATIVA DE INCLUIR .hs DE OUTROS DIRETÓRIOS
 //#include "./WiFiManager/WiFiManager.h"
 //#include "./SocketIOClient/SocketIOClient.h"
 
-//#include "thirdyPartyLibs/WiFiManager/WiFiManager.h"
-//#include "thirdyPartyLibs/SocketIOClient/SocketIOClient.h"
-
-#include "./thirdyPartyLibs/ArduinoJson/ArduinoJson.h"
-#include "./thirdyPartyLibs/pubsubclient/src/PubSubClient.h"
+// #include "thirdyPartyLibs/WiFiManager/WiFiManager.h"
+// #include "thirdyPartyLibs/SocketIOClient/SocketIOClient.h"
+#include "third-party/ArduinoJson/ArduinoJson.h"
+#include "third-party/pubsubclient/src/PubSubClient.h"
+#include "third-party/WiFiManager/WiFiManager.h"
+#include "third-party/SocketIOClient/SocketIOClient.h"
 
 #include "SaIoTSensor.h"
 #include "SaIoTActuator.h"
@@ -26,10 +27,13 @@ enum protocol{
 
 class SaIoTDeviceLib {
   private:
-    WiFiManager wifi;
-    SocketIOClient wsClient;
 
-    String serial = "Not setted",ip =  "Not setted", name =  "Not setted", sensor = "not setted";
+    SocketIOClient *wsClient;
+
+    String serial = "Not setted",
+    ip =  "Not setted",
+    name =  "Not setted",
+    sensor = "not setted";
     protocol _protocol = WS;
   public:
     void start(int boundRate);
@@ -37,16 +41,16 @@ class SaIoTDeviceLib {
 
     void setName(String _name);
     String getName(void);
-    
+
     void setSerial(String _serial);
     String getSerial(void);
-    
+
     void setIp(String _ip);
     String getIp(void);
-    
+
     void setProtocol(protocol _protocol);
     protocol getProtocol(void);
-    
+
     void setSensors(String _sensor);
     String getSensors(void);
 
@@ -56,7 +60,7 @@ class SaIoTDeviceLib {
     void handle(void);
 
   //WifiManager - SaIoT
-    
+
     //void setUser(String user);
     //String getUser(void);
 

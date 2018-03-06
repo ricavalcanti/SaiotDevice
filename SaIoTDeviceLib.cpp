@@ -1,9 +1,11 @@
 #include"SaIoTDeviceLib.h"
 
 void SaIoTDeviceLib::start(int boundRate){
+	wsClient = new SocketIOClient;
 	Serial.begin(boundRate);
   //Uncoment to always open mode AP
 	//wifi.startConfigPortal();
+	WiFiManager wifi;
 	wifi.autoConnect();
 	Serial.print(F("[SaIoT] connected to "));
  	Serial.println(WiFi.SSID());
@@ -13,11 +15,11 @@ void SaIoTDeviceLib::connect(String host, int port){
 	switch(_protocol){
 		case WS:
 
-		if (!wsClient.connect(host, port)){
+		if (!wsClient->connect(host, port)){
 			Serial.println(F("[SaIoT] connection device-server failed"));
 			return;
 		}
-		else if (wsClient.connected()){
+		else if (wsClient->connected()){
 			Serial.println(F("[SaIoT] connection device-server established"));
 		}
 		Serial.flush();
@@ -43,7 +45,7 @@ void SaIoTDeviceLib::setSerial(String _serial){
 String SaIoTDeviceLib::getSerial(void){
 	return serial;
 }
-    
+
 void SaIoTDeviceLib::setIp(String _ip){
 	ip = _ip;
 }
@@ -51,7 +53,7 @@ void SaIoTDeviceLib::setIp(String _ip){
 String SaIoTDeviceLib::getIp(void){
 	return ip;
 }
-    
+
 void SaIoTDeviceLib::setProtocol(protocol protocolType){
 	_protocol = protocolType;
 }
@@ -79,7 +81,7 @@ String SaIoTDeviceLib::getControler(void){
 void SaIoTDeviceLib::handle(void){
 	switch(_protocol){
 		case WS:
-			wsClient.monitor();
+			wsClient->monitor();
 			break;
 		case HTTP: Serial.println(F("[SaIoT] HTTP loop - not setted"));
 		case MQTT: Serial.println(F("[SaIoT] MQTT loop - not setted"));
