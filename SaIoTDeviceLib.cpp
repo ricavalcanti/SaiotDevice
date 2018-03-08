@@ -1,8 +1,9 @@
 #include"SaIoTDeviceLib.h"
 
-void SaIoTDeviceLib::start(int boundRate){
-	wsClient = new SocketIOClient;
+void SaIoTDeviceLib::start(String _serial,int boundRate){
+	setSerial(_serial);
 	Serial.begin(boundRate);
+	wsClient = new SocketIOClient;
   //Uncoment to always open mode AP
 	//wifi.startConfigPortal();
 	WiFiManager wifi;
@@ -11,9 +12,25 @@ void SaIoTDeviceLib::start(int boundRate){
  	Serial.println(WiFi.SSID());
 }
 
-void SaIoTDeviceLib::connect(String host, int port){
+void SaIoTDeviceLib::connect(String host, int port, String post, fncpt callback){
+			String JSON;
+  			StaticJsonBuffer<50> jsonBuffer;
+  			JsonObject& root = jsonBuffer.createObject();
+  			root["serial"] = serial;
+  			root.printTo(JSON);
+  			Serial.println(JSON);
 	switch(_protocol){
 		case WS:
+		/*
+		aqui vai a parte dõ vetor de ponteiros
+		para atribuição do on
+		*/
+		// for (int i = 0; i < qtdControllers; ++i)
+		// {
+		// 	//paranauê dos json (a definir);
+		// 	//wsClient.on(variave_contendo_keys,ponteiro_da_funcao);
+		// }
+		wsClient->on("atuar", callback);
 
 		if (!wsClient->connect(host, port)){
 			Serial.println(F("[SaIoT] connection device-server failed"));
@@ -21,6 +38,7 @@ void SaIoTDeviceLib::connect(String host, int port){
 		}
 		else if (wsClient->connected()){
 			Serial.println(F("[SaIoT] connection device-server established"));
+			wsClient->emit(post, JSON);
 		}
 		Serial.flush();
 		break;
