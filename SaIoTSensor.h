@@ -5,13 +5,14 @@
 
 class SaIoTSensor{
     public:
-        char key[50] =  "Not setted";
+        char key[5] =  "Not setted";
         char label[50] = "Not setted";
-        char unit[50] = "not setted";
-        
-        int deadband, timeout;
+        char unit[10] = "not setted";
+
+        unsigned long int deadband = 0, timeout = 0, lastTimeout = 0, lastResolution = 0,resolution = 0;
         double valor;
         bool isAcumm = false, isSync = true, isDigital=true;
+        typedef void (*verifyfunct)(void);
     private:
         /****************************************************************
          * Sensor JSON Functions
@@ -43,12 +44,18 @@ class SaIoTSensor{
         void setUnit(String _unit);
         String getUnit(void);
 
+        void setResolution(unsigned long _resolution);
+        unsigned long getResolution(void);
+
         /****************************************************************
          * Sensor Reading Functions: Verification and interruptions
         ****************************************************************/
-        void verify(/*function as a parameter*/);
+        void verify(void);
         // void interruptToRead(/*String port,function,change*/); //Timeout já setado no JSON;
         // void interruptToRead(/*function, int time*/);
+        
+        /* envia ao servidor o json com as informações da leitura do sensor*/
+        int send(void);
 };
 
 #endif

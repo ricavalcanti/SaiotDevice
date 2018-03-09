@@ -5,6 +5,8 @@
 #include <WiFiManager.h>
 #include <SocketIOClient.h>
 #include <ArduinoJson.h>
+#include <ESP8266HTTPClient.h>
+
 //TENTATIVA DE INCLUIR .hs DE OUTROS DIRETÓRIOS
 //#include "./WiFiManager/WiFiManager.h"
 //#include "./SocketIOClient/SocketIOClient.h"
@@ -28,7 +30,9 @@ typedef void (*fncpt)(String);
 class SaIoTDeviceLib {
   private:
 
-    SocketIOClient *wsClient;
+    SocketIOClient *ws;
+    HTTPClient *http;
+    
     SaIoTSensor *sensors;
     SaIoTActuator *actuators;
 

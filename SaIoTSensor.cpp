@@ -72,3 +72,32 @@ void SaIoTSensor::setUnit(String _unit){
 String SaIoTSensor::getUnit(void){
     return unit;
 }
+
+void SaIoTSensor::setResolution(unsigned long _resolution){
+    resolution = _resolution;
+}
+unsigned long SaIoTSensor::getResolution(void){
+    return resolution;
+}
+void SaIoTSensor::verify(void){
+    if(timeout){
+        if((abs(millis()-lastTimeout)> timeout)){
+            send();
+            /*atualiza a variável lastTimeout para o time da última ocorrência do timeout*/
+            lastTimeout = millis();
+        }
+    }
+}
+
+/* envia ao servidor o json com as informações da leitura do sensor*/
+int SaIoTSensor::send(void){
+    switch(_protocol){
+		case WS:
+			wsClient->emit(value,key);
+			break;
+		case HTTP: 
+            Serial.println(F("[SaIoT] HTTP loop - not setted"));
+		case MQTT: 
+            Serial.println(F("[SaIoT] MQTT loop - not setted"));
+	}
+}
