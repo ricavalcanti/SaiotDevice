@@ -5,7 +5,10 @@
 
 class SaIoTSensor{
     public:
-        String key =  "Not setted", label = "Not setted", unit = "not setted";
+        char key[50] =  "Not setted";
+        char label[50] = "Not setted";
+        char unit[50] = "not setted";
+        
         int deadband, timeout;
         double valor;
         bool isAcumm = false, isSync = true, isDigital=true;

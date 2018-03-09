@@ -29,11 +29,12 @@ class SaIoTDeviceLib {
   private:
 
     SocketIOClient *wsClient;
+    SaIoTSensor *sensors;
+    SaIoTActuator *actuators;
 
-    String serial = "Not setted",
-    ip =  "Not setted",
-    name =  "Not setted",
-    sensor = "not setted";
+    char serial[50] = "Not setted";
+    char ip[50] =  "Not setted";
+    char name[50] =  "Not setted";
     protocol _protocol = WS;
   public:
     void start(String serial,int boundRate);
@@ -51,11 +52,11 @@ class SaIoTDeviceLib {
     void setProtocol(protocol _protocol);
     protocol getProtocol(void);
 
-    void setSensors(String _sensor);
+    /*void setSensors(String _sensor);
     String getSensors(void);
 
     void setControler(String _controler);
-    String getControler(void);
+    String getControler(void);*/
 
     void handle(void);
 

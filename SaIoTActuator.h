@@ -5,9 +5,11 @@
 
 class SaIoTActuator{
     private:
-      String key = "Not setted", type = "Not setted", label = "Not setted";
+      char key[50] = "Not setted";
+      char type[50] = "Not setted";
+      char label[50] = "Not setted";
+
       double min=0,max=1,step=0.01;
-      void *(actionToBeExec)(String);
     public:
         void setKey(String _key);
         String getKey(void);

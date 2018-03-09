@@ -22,7 +22,7 @@ void SaIoTDeviceLib::connect(String host, int port, String post, fncpt callback)
 	switch(_protocol){
 		case WS:
 		/*
-		aqui vai a parte dõ vetor de ponteiros
+		aqui vai a parte do vetor de ponteiros
 		para atribuição do on
 		*/
 		// for (int i = 0; i < qtdControllers; ++i)
