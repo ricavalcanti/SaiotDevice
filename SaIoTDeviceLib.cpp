@@ -1,7 +1,7 @@
 #include"SaIoTDeviceLib.h"
 
 void SaIoTDeviceLib::start(String _serial,int boundRate){
-	setSerial(_serial);
+	// setSerial(_serial);
 	Serial.begin(boundRate);
 	
 	switch(_protocol){
@@ -25,13 +25,13 @@ void SaIoTDeviceLib::start(String _serial,int boundRate){
 }
 
 void SaIoTDeviceLib::connect(String host, int port, String post, fncpt callback){
-			String JSON;
-  			StaticJsonBuffer<50> jsonBuffer;
-  			JsonObject& root = jsonBuffer.createObject();
-  			root["serial"] = serial;
-  			root.printTo(JSON);
-  			Serial.println(JSON);
-	switch(_protocol){
+	String JSON;
+  	StaticJsonBuffer<50> jsonBuffer;
+  	JsonObject& root = jsonBuffer.createObject();
+  	root["serial"] = serial;
+  	root.printTo(JSON);
+  	Serial.println(JSON);
+  	switch(_protocol){
 		case WS:
 		/*
 		aqui vai a parte do vetor de ponteiros
@@ -64,54 +64,6 @@ void SaIoTDeviceLib::connect(String host, int port, String post, fncpt callback)
 	}
 }
 
-void SaIoTDeviceLib::setName(String _name){
-	name = _name;
-}
-
-String SaIoTDeviceLib::getName(void){
-	return name;
-}
-
-void SaIoTDeviceLib::setSerial(String _serial){
-	serial = _serial;
-}
-
-String SaIoTDeviceLib::getSerial(void){
-	return serial;
-}
-
-void SaIoTDeviceLib::setIp(String _ip){
-	ip = _ip;
-}
-
-String SaIoTDeviceLib::getIp(void){
-	return ip;
-}
-
-void SaIoTDeviceLib::setProtocol(protocol protocolType){
-	_protocol = protocolType;
-}
-
-protocol SaIoTDeviceLib::getProtocol(void){
-	return _protocol;
-}
-
-void SaIoTDeviceLib::setSensors(String _sensor){
-	sensor = _sensor;
-}
-
-String SaIoTDeviceLib::getSensors(void){
-	return sensor;
-}
-
-void SaIoTDeviceLib::setControler(String _controler){
-
-}
-
-String SaIoTDeviceLib::getControler(void){
-
-}
-
 void SaIoTDeviceLib::handle(void){
 	switch(_protocol){
 		case WS:
@@ -121,6 +73,62 @@ void SaIoTDeviceLib::handle(void){
 		case MQTT: Serial.println(F("[SaIoT] MQTT loop - not setted"));
 	}
 }
+
+// void SaIoTDeviceLib::setName(String _name){
+// 	name = _name;
+// 	//name-char _name-string...string -to- char
+// }
+
+// String SaIoTDeviceLib::getName(void){
+// 	return name;
+// }
+
+// void SaIoTDeviceLib::setSerial(String _serial){
+// 	serial = _serial;
+// 	//serial - char / _serial - string...string -to- char
+// }
+// }
+
+// String SaIoTDeviceLib::getSerial(void){
+// 	return serial;
+// }
+
+// void SaIoTDeviceLib::setIp(String _ip){
+// 	ip = _ip;
+// 	//ip - char  / _ip - string...string -to- char
+// }
+// }
+
+// String SaIoTDeviceLib::getIp(void){
+// 	return ip;
+// }
+
+// void SaIoTDeviceLib::setProtocol(protocol protocolType){
+// 	_protocol = protocolType;
+// }
+
+// protocol SaIoTDeviceLib::getProtocol(void){
+// 	return _protocol;
+// }
+
+// void SaIoTDeviceLib::setSensors(String _sensor){
+// 	// sensor = _sensor;
+// 	//sensor-* / _name-string... ???typedef void (*fncpt)(String)???
+// }
+
+
+// String SaIoTDeviceLib::getSensors(void){
+// 	return sensor;
+// }
+
+// void SaIoTDeviceLib::setControler(String _controler){
+
+// }
+
+// String SaIoTDeviceLib::getControler(void){
+
+// }
+
 /*void SaIoTDeviceLib::setUser(String user){
 	_usuario = user;
 }
