@@ -5,9 +5,8 @@
 #include <WiFiManager.h>
 #include <SocketIOClient.h>
 #include <ArduinoJson.h>
-<<<<<<< HEAD
 #include <ESP8266HTTPClient.h>
-=======
+
 //TENTATIVA DE INCLUIR .hs DE OUTROS DIRETÓRIOS
 //#include "./WiFiManager/WiFiManager.h"
 //#include "./SocketIOClient/SocketIOClient.h"
@@ -18,9 +17,9 @@
 // #include "third-party/pubsubclient/src/PubSubClient.h"
 // #include "third-party/WiFiManager/WiFiManager.h"
 // #include "third-party/SocketIOClient/SocketIOClient.h"
->>>>>>> parent of 430ff9c... Início da implementação do protocolo HTTP
 
-#include "SaIoTSensor.h"
+// #include "SaIoTSensor.h"
+// #include "SaIoTActuator.h"
 
 enum protocol{
   WS,
@@ -31,9 +30,11 @@ typedef void (*fncpt)(String);
 class SaIoTDeviceLib {
   private:
 
-    SocketIOClient *wsClient;
-    SaIoTSensor *sensors;
-    SaIoTActuator *actuators;
+    SocketIOClient *ws;
+    // HTTPClient *http;
+
+    // SaIoTSensor *sensors;
+    // SaIoTActuator *actuators;
 
     char serial[50] = "Not setted";
     char ip[50] =  "Not setted";
@@ -42,29 +43,28 @@ class SaIoTDeviceLib {
   public:
     void start(String serial,int boundRate);
     void connect(String host, int port, String post, fncpt callback);
-    void handle(void);
 
-
-    // void setName(String _name);
-    // String getName(void);
-
+    void setName(String _name);
+    String getName(void);
+    //
     // void setSerial(String _serial);
     // String getSerial(void);
-
+    //
     // void setIp(String _ip);
     // String getIp(void);
-
+    //
     // void setProtocol(protocol _protocol);
     // protocol getProtocol(void);
-
+    //
     // /*void setSensors(String _sensor);
     // String getSensors(void);
-
+    //
     // void setControler(String _controler);
-    // String getControler(void);*/
+    // String getControler(void);
 
+    void handle(void);
 
-    //WifiManager - SaIoT
+  //WifiManager - SaIoT
 
     //void setUser(String user);
     //String getUser(void);
