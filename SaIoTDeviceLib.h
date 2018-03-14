@@ -5,7 +5,20 @@
 #include <WiFiManager.h>
 #include <SocketIOClient.h>
 #include <ArduinoJson.h>
+<<<<<<< HEAD
 #include <ESP8266HTTPClient.h>
+=======
+//TENTATIVA DE INCLUIR .hs DE OUTROS DIRETÓRIOS
+//#include "./WiFiManager/WiFiManager.h"
+//#include "./SocketIOClient/SocketIOClient.h"
+
+// #include "thirdyPartyLibs/WiFiManager/WiFiManager.h"
+// #include "thirdyPartyLibs/SocketIOClient/SocketIOClient.h"
+// #include "third-party/ArduinoJson/ArduinoJson.h"
+// #include "third-party/pubsubclient/src/PubSubClient.h"
+// #include "third-party/WiFiManager/WiFiManager.h"
+// #include "third-party/SocketIOClient/SocketIOClient.h"
+>>>>>>> parent of 430ff9c... Início da implementação do protocolo HTTP
 
 #include "SaIoTSensor.h"
 
@@ -18,9 +31,7 @@ typedef void (*fncpt)(String);
 class SaIoTDeviceLib {
   private:
 
-    SocketIOClient *ws;
-    HTTPClient *http;
-    
+    SocketIOClient *wsClient;
     SaIoTSensor *sensors;
     SaIoTActuator *actuators;
 

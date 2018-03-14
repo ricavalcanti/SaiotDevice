@@ -3,19 +3,7 @@
 void SaIoTDeviceLib::start(String _serial,int boundRate){
 	// setSerial(_serial);
 	Serial.begin(boundRate);
-	
-	switch(_protocol){
-		case WS:
-			ws = new SocketIOClient;
-			break;
-		case HTTP:
-			httpClient = new httpClient;
-			break;
-		case MQTT:
-			Serial.println(F("[SaIoT] MQTT choosed - not setted"));
-			break;
-		}
-
+	wsClient = new SocketIOClient;
   //Uncoment to always open mode AP
 	//wifi.startConfigPortal();
 	WiFiManager wifi;
@@ -40,27 +28,23 @@ void SaIoTDeviceLib::connect(String host, int port, String post, fncpt callback)
 		// for (int i = 0; i < qtdControllers; ++i)
 		// {
 		// 	//paranauê dos json (a definir);
-		// 	//ws.on(variave_contendo_keys,ponteiro_da_funcao);
+		// 	//wsClient.on(variave_contendo_keys,ponteiro_da_funcao);
 		// }
-		ws->on("atuar", callback);
+		wsClient->on("atuar", callback);
 
-		if (!ws->connect(host, port)){
+		if (!wsClient->connect(host, port)){
 			Serial.println(F("[SaIoT] connection device-server failed"));
 			return;
 		}
-		else if (ws->connected()){
+		else if (wsClient->connected()){
 			Serial.println(F("[SaIoT] connection device-server established"));
-			ws->emit(post, JSON);
+			wsClient->emit(post, JSON);
 		}
 		Serial.flush();
 		break;
 
-		case HTTP:
-			Serial.println(F("[SaIoT] HTTP choosed - not setted"));
-			break;
-		case MQTT:
-			Serial.println(F("[SaIoT] MQTT choosed - not setted"));
-			break;
+		case HTTP: Serial.println(F("[SaIoT] HTTP choosed - not setted"));
+		case MQTT: Serial.println(F("[SaIoT] MQTT choosed - not setted"));
 	}
 }
 
@@ -129,6 +113,18 @@ void SaIoTDeviceLib::handle(void){
 
 // }
 
+<<<<<<< HEAD
+=======
+void SaIoTDeviceLib::handle(void){
+	switch(_protocol){
+		case WS:
+			wsClient->monitor();
+			break;
+		case HTTP: Serial.println(F("[SaIoT] HTTP loop - not setted"));
+		case MQTT: Serial.println(F("[SaIoT] MQTT loop - not setted"));
+	}
+}
+>>>>>>> parent of 430ff9c... Início da implementação do protocolo HTTP
 /*void SaIoTDeviceLib::setUser(String user){
 	_usuario = user;
 }
