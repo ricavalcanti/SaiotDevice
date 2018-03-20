@@ -6,27 +6,15 @@
 #include <SocketIOClient.h>
 #include <ArduinoJson.h>
 #include <ESP8266HTTPClient.h>
-
-//TENTATIVA DE INCLUIR .hs DE OUTROS DIRETÓRIOS
-//#include "./WiFiManager/WiFiManager.h"
-//#include "./SocketIOClient/SocketIOClient.h"
-
-// #include "thirdyPartyLibs/WiFiManager/WiFiManager.h"
-// #include "thirdyPartyLibs/SocketIOClient/SocketIOClient.h"
-// #include "third-party/ArduinoJson/ArduinoJson.h"
-// #include "third-party/pubsubclient/src/PubSubClient.h"
-// #include "third-party/WiFiManager/WiFiManager.h"
-// #include "third-party/SocketIOClient/SocketIOClient.h"
-
-// #include "SaIoTSensor.h"
-// #include "SaIoTActuator.h"
+#include "SaIoTSensor.h"
+#include "SaIoTController.h"
 
 enum protocol{
   WS,
   MQTT,
   HTTP
 };
-typedef void (*fncpt)(String);
+typedef void (*fncpt)(char*);
 class SaIoTDeviceLib {
   private:
 
@@ -34,55 +22,56 @@ class SaIoTDeviceLib {
     // HTTPClient *http;
 
     // SaIoTSensor *sensors;
-    // SaIoTActuator *actuators;
+    // SaIoTActuator *actuators
 
     char serial[50] = "Not setted";
     char ip[50] =  "Not setted";
     char name[50] =  "Not setted";
     protocol _protocol = WS;
+    unsigned char qtdSensors = 1;
+    unsigned char qtdControllers = 1;
   public:
-    void start(String serial,int boundRate);
-    void connect(String host, int port, String post, fncpt callback);
+    void start(char* serial, protocol _protocol, char* host, int port, char* post);
+    void handle(void);
 
-    void setName(String _name);
-    String getName(void);
-    //
-    // void setSerial(String _serial);
-    // String getSerial(void);
-    //
-    // void setIp(String _ip);
-    // String getIp(void);
-    //
+    void setName(char* _name);
+    char* getName(void);
+    
+    void setSerial(char* _serial);
+    char* getSerial(void);
+    
+    void setIp(char* _ip);
+    char* getIp(void);
+    
+    // void setSensors(char* _sensor);
+    // char* getSensors(void);
+    
+    // void setControler(char* _controler);
+    // char* getControler(void);
     // void setProtocol(protocol _protocol);
     // protocol getProtocol(void);
-    //
-    // /*void setSensors(String _sensor);
-    // String getSensors(void);
-    //
-    // void setControler(String _controler);
-    // String getControler(void);
+    
 
-    void handle(void);
 
   //WifiManager - SaIoT
 
-    //void setUser(String user);
-    //String getUser(void);
+    //void setUser(char* user);
+    //char* getUser(void);
 
-    //void setUserPassword(String password);
-    //String getUserPassword(void);
+    //void setUserPassword(char* password);
+    //char* getUserPassword(void);
 
 
-    //void setCentral(String central); perguntar o que é
+    //void setCentral(char* central); perguntar o que é
     //void setSincrono(bool sincrono); está no sensor
     //void setTempoEnvio(int tempoEnvio); //timeout, está no sensor*/
 };
 
 #endif
 
-/*String _usuario;
-String _senhaUsuario;
-String _central;
+/*char* _usuario;
+char* _senhaUsuario;
+char* _central;
     int    _inicioMemoria;
     int    _tamanhoMemoria;
     bool   _sincrono; //true == sincrono && false == assincrono

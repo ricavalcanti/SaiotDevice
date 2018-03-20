@@ -1,6 +1,6 @@
-#include "SaIoTActuator.h"
+#include "SaIoTController.h"
 
-  void SaIoTActuator::setKey(String _key){
+  void SaIoTController::setKey(String _key){
   size_t size = _key.length();
   for (size_t a=0; a<=64 && a<=size ;a++)
     {
@@ -8,11 +8,11 @@
     }
   }
 
-  String SaIoTActuator::getKey(void){
+  String SaIoTController::getKey(void){
     return key;
   }
 
-  void SaIoTActuator::setType(String _type){
+  void SaIoTController::setType(String _type){
   	size_t size = _type.length();
   	for (size_t a=0; a<=64 && a<=size ;a++)
       {
@@ -20,11 +20,11 @@
       }
   }
 
-  String SaIoTActuator::getType(void){
+  String SaIoTController::getType(void){
     return type;
   }
 
-void SaIoTActuator::setLabel(String _label){
+void SaIoTController::setLabel(String _label){
   size_t size = _label.length();
   for (register size_t a=0; a<=64 && a<=size ;a++)
   {
@@ -32,35 +32,35 @@ void SaIoTActuator::setLabel(String _label){
   }
   }
 
-  String SaIoTActuator::getLabel(void){
+  String SaIoTController::getLabel(void){
     return label;
   }
 
-  void SaIoTActuator::setInterval(double _min,double _step,double _max){
+  void SaIoTController::setInterval(double _min,double _step,double _max){
     min  = _min;
     step = _step;
     max  = _max;
   }
 
-  void SaIoTActuator::setMin(double _min){
+  void SaIoTController::setMin(double _min){
      min = _min;
   }
-  void SaIoTActuator::setMax(double _max){
+  void SaIoTController::setMax(double _max){
     max = _max;
   }
 
-  void SaIoTActuator::setStep(double _step){
+  void SaIoTController::setStep(double _step){
     step = _step;
   }
 
-  double SaIoTActuator::getMin(void){
+  double SaIoTController::getMin(void){
     return min;
   }
 
-  double SaIoTActuator::getMax(void){
+  double SaIoTController::getMax(void){
     return max;
   }
 
-  double SaIoTActuator::getStep(void){
+  double SaIoTController::getStep(void){
     return step;
   }

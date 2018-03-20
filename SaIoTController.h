@@ -1,12 +1,13 @@
-#ifndef SaIoTActuator_h
-#define SaIoTActuator_h
+#ifndef SaIoTController_h
+#define SaIoTController_h
 
 #include<Arduino.h>
 
-class SaIoTActuator{
+
+class SaIoTController{
     private:
-      char key[50] = "Not setted";
-      char type[50] = "Not setted";
+      char key[5] = "";
+      char type[20] = "";
       char label[50] = "Not setted";
 
       double min=0,max=1,step=0.01;
