@@ -1,7 +1,9 @@
 #include"SaIoTDeviceLib.h"
 
-void SaIoTDeviceLib::start(char* _serial, protocol _protocol, char* host, int port, char* post){
+void SaIoTDeviceLib::start(char* _serial, protocol _protocol, char* _host, int _port, char* post){
   setSerial(_serial);
+  setHost(_host);
+  setPort(_port);
   // switch(_protocol){
   //  case WS:
     //  break;
@@ -43,7 +45,7 @@ void SaIoTDeviceLib::start(char* _serial, protocol _protocol, char* host, int po
       // ws->on("atuar", callback);
       }
 
-      if (!ws->connect(host, port)){
+      if (!ws->connect(_host, _port)){
         Serial.println(F("[SaIoT] connection device-server failed"));
         return;
       }
@@ -57,9 +59,29 @@ void SaIoTDeviceLib::start(char* _serial, protocol _protocol, char* host, int po
   //  case HTTP:
   //    Serial.println(F("[SaIoT] HTTP choosed - not setted"));
   //    break;
-  //  case MQTT:
-  //    Serial.println(F("[SaIoT] MQTT choosed - not setted"));
-  //    break;
+    case MQTT:
+    WiFiClient espClient;
+    mqttClient = new PubSubClient;
+    mqttClient->setClient(espClient);
+    mqttClient->setServer(_host, _port);
+    for (int i = 0; i < qtdControllers; ++i)
+    {
+     //paranauê dos json (a definir);
+     //ws.on(variave_contendo_keys,ponteiro_da_funcao);
+    // ws->on("atuar", callback);
+    }
+
+    mqttClient->connect(_serial);
+    if (!(mqttClient->connected())){
+      Serial.println(F("[SaIoT] connection device-server failed"));
+      return;
+    }
+    else if (mqttClient->connected()){
+      Serial.println(F("[SaIoT] connection device-server established"));
+      mqttClient->publish(post, JSON.c_str());
+    }
+    Serial.flush();
+    break;
   }
 
 }
@@ -110,6 +132,31 @@ char* SaIoTDeviceLib::getIp(void){
  return ip;
 }
 
+void SaIoTDeviceLib::setHost(char* _host){
+ size_t index = 0;//testar byte;
+  while(*_host)
+  {
+    host[index++] = *_host++;
+    // _ip++;
+  }
+}
+
+char* SaIoTDeviceLib::getHost(void){
+ return host;
+}
+
+void SaIoTDeviceLib::setPort(int _port){
+  port = _port;
+}
+
+int SaIoTDeviceLib::getPort(void){
+ return port;
+}
+
+
+
+
+
 // void SaIoTDeviceLib::setUser(char* user){
 //   _usuario = user;
 // }
@@ -148,4 +195,3 @@ char* SaIoTDeviceLib::getIp(void){
 // char* SaIoTDeviceLib::getControler(void){
 
 // }
-
