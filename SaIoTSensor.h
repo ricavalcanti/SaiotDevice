@@ -4,7 +4,7 @@
 #include<Arduino.h>
 
 class SaIoTSensor{
-    public:
+    private:
         char key[50] =  "Not setted";
         char label[50] = "Not setted";
         char unit[50] = "Not setted";
@@ -13,7 +13,7 @@ class SaIoTSensor{
         double valor;
         bool isAcumm = false, isSync = true, isDigital=true;
         typedef void (*verifyfunct)(void);
-    private:
+    public:
         /****************************************************************
          * Sensor JSON Functions
         ****************************************************************/
