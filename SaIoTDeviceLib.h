@@ -7,6 +7,7 @@
 #include <ArduinoJson.h>
 #include <ESP8266HTTPClient.h>
 #include <PubSubClient.h> //https://pubsubclient.knolleary.net/api.html
+
 #include "SaIoTSensor.h"
 #include "SaIoTController.h"
 
@@ -24,9 +25,6 @@ class SaIoTDeviceLib {
     PubSubClient *mqttClient;
     // HTTPClient *http;
 
-    // SaIoTSensor *sensors;
-    // SaIoTActuator *actuators
-
     char serial[50] = "Not setted";
     char ip[50] =  "Not setted";
     char name[50] =  "Not setted";
@@ -35,6 +33,8 @@ class SaIoTDeviceLib {
     protocol _protocol = WS;
     unsigned char qtdSensors = 1;
     unsigned char qtdControllers = 1;
+    SaIoTSensor sensors[qtdSensors];
+    //SaIoTController controllers[qtdControllers];
   public:
     void start(char* serial, protocol _protocol, char* _host, int _port, char* post);
     void handle(void);
@@ -54,7 +54,7 @@ class SaIoTDeviceLib {
     void setPort(int _port);
     int getPort(void);
 
-    // void setSensors(char* _sensor);
+    void addSensors(String _key, bool _isSync, int _deadband, int _timeout, bool _isDigital, bool _isAcumm, String _label, double _valor, String _unit);
     // char* getSensors(void);
 
     // void setControler(char* _controler);

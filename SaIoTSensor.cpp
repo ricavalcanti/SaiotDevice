@@ -1,5 +1,17 @@
 #include"SaIoTSensor.h"
 
+SaIoTSensor::SaIoTSensor(String _key, bool _isSync, int _deadband, int _timeout, bool _isDigital, bool _isAcumm, String _label, double _valor, String _unit, int _resolution){
+    setKey(_key);
+    setSyncCommunication(_isSync);
+    setDeadBand(_deadband);
+    setTimeout(_timeout);
+    setDigitalDevice(_isDigital);
+    setAcummulate(_isAcumm);
+    setLabel(_label);
+    setValor(_valor);
+    setUnit(_unit);
+    setResolution(_resolution);
+}
 
 void SaIoTSensor::setKey(String _key){
   size_t size = _key.length();

@@ -4,6 +4,7 @@ void SaIoTDeviceLib::start(char* _serial, protocol _protocol, char* _host, int _
   setSerial(_serial);
   setHost(_host);
   setPort(_port);
+  
   // switch(_protocol){
   //  case WS:
     //  break;
@@ -30,7 +31,9 @@ void SaIoTDeviceLib::start(char* _serial, protocol _protocol, char* _host, int _
   JsonObject& root = jsonBuffer.createObject();
   root["serial"] = serial;
   root.printTo(JSON);
-  Serial.println(JSON);
+  
+  Serial.println(JSON); //DEBUG
+  
   switch(_protocol){
     case WS:
       ws = new SocketIOClient;
@@ -38,9 +41,11 @@ void SaIoTDeviceLib::start(char* _serial, protocol _protocol, char* _host, int _
       aqui vai a parte do vetor de ponteiros
       para atribuição do on
       */
-      for (int i = 0; i < qtdControllers; ++i)
-      {
+      for (int i = 0; i < qtdControllers; ++i){
        //paranauê dos json (a definir);
+
+
+
        //ws.on(variave_contendo_keys,ponteiro_da_funcao);
       // ws->on("atuar", callback);
       }
@@ -60,16 +65,15 @@ void SaIoTDeviceLib::start(char* _serial, protocol _protocol, char* _host, int _
   //    Serial.println(F("[SaIoT] HTTP choosed - not setted"));
   //    break;
     case MQTT:
-    WiFiClient espClient;
-    mqttClient = new PubSubClient;
-    mqttClient->setClient(espClient);
-    mqttClient->setServer(_host, _port);
-    for (int i = 0; i < qtdControllers; ++i)
-    {
-     //paranauê dos json (a definir);
-     //ws.on(variave_contendo_keys,ponteiro_da_funcao);
-    // ws->on("atuar", callback);
-    }
+      WiFiClient espClient;
+      mqttClient = new PubSubClient;
+      mqttClient->setClient(espClient);
+      mqttClient->setServer(_host, _port);
+      for (int i = 0; i < qtdControllers; ++i){
+      //paranauê dos json (a definir);
+      //ws.on(variave_contendo_keys,ponteiro_da_funcao);
+      // ws->on("atuar", callback);
+      }
 
     mqttClient->connect(_serial);
     if (!(mqttClient->connected())){
@@ -153,9 +157,9 @@ int SaIoTDeviceLib::getPort(void){
  return port;
 }
 
-
-
-
+void SaIoTDeviceLib::addSensor(String _key, bool _isSync, int _deadband, int _timeout, bool _isDigital, bool _isAcumm, String _label, double _valor, String _unit){
+  sensor[qtdSensors++] = new SaIoTSensor( _key,_isSync,_deadband,_timeout,_isDigital,_isAcumm,_label,_valor,_unit);
+ }
 
 // void SaIoTDeviceLib::setUser(char* user){
 //   _usuario = user;
@@ -178,10 +182,6 @@ int SaIoTDeviceLib::getPort(void){
 //
 // protocol SaIoTDeviceLib::getProtocol(void){
 //  return _protocol;
-// }
-
-// void SaIoTDeviceLib::setSensors(char* _sensor){
-//  sensor = _sensor;
 // }
 
 // char* SaIoTDeviceLib::getSensors(void){

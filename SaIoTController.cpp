@@ -26,7 +26,7 @@
 
 void SaIoTController::setLabel(String _label){
   size_t size = _label.length();
-  for (register size_t a=0; a<=64 && a<=size ;a++)
+  for (size_t a=0; a<=64 && a<=size ;a++)
   {
     label[a] = char(_label[a]);
   }
