@@ -12,6 +12,10 @@ class SaIoTController{
 
       double min=0,max=1,step=0.01;
     public:
+        SaIoTController();
+        SaIoTController(String _key, String _type, String _label, double _min, double _step, double _max);
+        ~SaIoTController();
+
         void setKey(String _key);
         String getKey(void);
 

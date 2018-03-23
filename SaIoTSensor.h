@@ -16,6 +16,7 @@ class SaIoTSensor{
     public:
         SaIoTSensor();
         SaIoTSensor(String _key, bool _isSync, int _deadband, int _timeout, bool _isDigital, bool _isAcumm, String _label, double _valor, String _unit);
+        ~SaIoTSensor();
         
         /*****************************************************************************************************************************************************
          * Sensor JSON Functions

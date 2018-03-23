@@ -1,5 +1,12 @@
 #include "SaIoTController.h"
 
+SaIoTController::SaIoTController(String _key, String _type, String _label, double _min, double _step, double _max){
+  setKey(_key);
+  setType(_type);
+  setLabel(_label);
+  setInterval(_min,_step,_max);
+}
+
   void SaIoTController::setKey(String _key){
   size_t size = _key.length();
   for (size_t a=0; a<=64 && a<=size ;a++)

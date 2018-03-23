@@ -23,9 +23,8 @@ void SaIoTDeviceLib::start(char* _serial, protocol _protocol, char* _host, int _
   wifi.autoConnect(_serial);
   Serial.print(F("[SaIoT] connected to "));
   Serial.println(WiFi.SSID());
-// }
 
-// void SaIoTDeviceLib::connect(char* host, int port, char* post, fncpt callback){
+
   String JSON;
   StaticJsonBuffer<50> jsonBuffer;
   JsonObject& root = jsonBuffer.createObject();
@@ -60,7 +59,7 @@ void SaIoTDeviceLib::start(char* _serial, protocol _protocol, char* _host, int _
       }
       Serial.flush();
       break;
-  //
+
   //  case HTTP:
   //    Serial.println(F("[SaIoT] HTTP choosed - not setted"));
   //    break;
@@ -160,6 +159,12 @@ int SaIoTDeviceLib::getPort(void){
 void SaIoTDeviceLib::addSensor(String _key, bool _isSync, int _deadband, int _timeout, bool _isDigital, bool _isAcumm, String _label, double _valor, String _unit){
   sensor[qtdSensors++] = new SaIoTSensor( _key,_isSync,_deadband,_timeout,_isDigital,_isAcumm,_label,_valor,_unit);
  }
+
+void SaIoTDeviceLib::addController(String _key, String _type, String _label, double _min, double _step, double _max){
+  controllers[qtdControllers++] = new SaIoTController(_key, _type, _label, _min, _step, _max);
+ }
+ 
+
 
 // void SaIoTDeviceLib::setUser(char* user){
 //   _usuario = user;
