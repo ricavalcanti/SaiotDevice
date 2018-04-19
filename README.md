@@ -26,3 +26,5 @@ sendo
 - **Host** *char**:
 - **Port** *int*:  Porta de comunicação
 - **Post** *char**: Nome do evento 
+
+**OBS.:** Caso seja a primeira conexão, o dispositivo entrará no modo AP. Para conectar, basta então, acessar a rede gerada pelo microcontrolador e configurá-la. No mais, o dispositivo tentará se reconectar com a rede salva anteriormente.
