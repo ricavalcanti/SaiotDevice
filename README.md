@@ -25,7 +25,7 @@ void setup(){
 `````
 sendo:
 | NOME |TIPO  | DESCRIÇÃO
-|--|--|--|
+|:------:|:------:|:-------:|
 | Serial | char* ||
 |Host|char*|
 |Port|int|Porta de comunicação |
@@ -43,7 +43,7 @@ void setup(){
 ```
 onde
 | NOME |TIPO  | DESCRIÇÃO
-|--|--|--|
+|:----:|:----:|:-----:|
 | Key| char* ||
 |Is Sync|bool|*true* se o dispositivo se comunicar com o servidor de forma síncrona.
 |Deadband|int|
