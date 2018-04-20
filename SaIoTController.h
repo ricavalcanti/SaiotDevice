@@ -13,17 +13,17 @@ class SaIoTController{
       double min=0,max=1,step=0.01;
     public:
         SaIoTController();
-        SaIoTController(String _key, String _type, String _label, double _min, double _step, double _max);
+        SaIoTController(char* _key, char* _type, char* _label, double _min, double _step, double _max);
         ~SaIoTController();
 
-        void setKey(String _key);
-        String getKey(void);
+        void setKey(char* _key);
+        char* getKey(void);
 
-        void setType(String _type);
-        String getType(void);
+        void setType(char* _type);
+        char* getType(void);
 
-        void setLabel(String _label);
-        String getLabel(void);
+        void setLabel(char* _label);
+        char* getLabel(void);
 
         void setInterval(double _min,double _step,double _max);
 

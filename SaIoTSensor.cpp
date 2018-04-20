@@ -1,6 +1,6 @@
 #include"SaIoTSensor.h"
 
-SaIoTSensor::SaIoTSensor(String _key, bool _isSync, int _deadband, int _timeout, bool _isDigital, bool _isAcumm, String _label, double _valor, String _unit, int _resolution){
+SaIoTSensor::SaIoTSensor(char* _key, bool _isSync, int _deadband, int _timeout, bool _isDigital, bool _isAcumm, char* _label, double _valor, char* _unit, int _resolution){
     setKey(_key);
     setSyncCommunication(_isSync);
     setDeadBand(_deadband);
@@ -13,7 +13,7 @@ SaIoTSensor::SaIoTSensor(String _key, bool _isSync, int _deadband, int _timeout,
     setResolution(_resolution);
 }
 
-void SaIoTSensor::setKey(String _key){
+void SaIoTSensor::setKey(char* _key){
   size_t size = _key.length();
   for (size_t a=0; a<=64 && a<=size ;a++)
           {
@@ -65,7 +65,7 @@ bool SaIoTSensor::isAcummulate(void){
     return isAcumm;
 }
 
-void SaIoTSensor::setLabel(String _label){
+void SaIoTSensor::setLabel(char* _label){
   size_t size = _label.length();
   for (size_t a=0; a<=64 && a<=size ;a++)
           {
@@ -85,7 +85,7 @@ double SaIoTSensor::getValor(void){
     return valor;
 }
 
-void SaIoTSensor::setUnit(String _unit){
+void SaIoTSensor::setUnit(char* _unit){
   size_t size = _unit.length();
   for (size_t a=0; a<=64 && a<=size ;a++)
           {

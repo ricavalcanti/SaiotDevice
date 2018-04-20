@@ -15,14 +15,14 @@ class SaIoTSensor{
         typedef void (*verifyfunct)(void);
     public:
         SaIoTSensor();
-        SaIoTSensor(String _key, bool _isSync, int _deadband, int _timeout, bool _isDigital, bool _isAcumm, String _label, double _valor, String _unit);
+        SaIoTSensor(char* _key, bool _isSync, int _deadband, int _timeout, bool _isDigital, bool _isAcumm, char* _label, double _valor, char* _unit);
         ~SaIoTSensor();
         
         /*****************************************************************************************************************************************************
          * Sensor JSON Functions
         ******************************************************************************************************************************************************/
-        void setKey(String _key);
-        String getKey(void);
+        void setKey(char* _key);
+        char* getKey(void);
 
         void setSyncCommunication(bool _isSync);
         bool isSyncCommunication(void);
@@ -39,14 +39,14 @@ class SaIoTSensor{
         void setAcummulate(bool _isAcummulate);
         bool isAcummulate(void);
 
-        void setLabel(String _keylabel);
-        String getLabel(void);
+        void setLabel(char* _keylabel);
+        char* getLabel(void);
 
         void setValor(double _valor);
         double getValor(void);
 
-        void setUnit(String _unit);
-        String getUnit(void);
+        void setUnit(char* _unit);
+        char* getUnit(void);
 
         void setResolution(unsigned long _resolution);
         unsigned long getResolution(void);
