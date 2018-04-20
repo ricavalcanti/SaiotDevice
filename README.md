@@ -58,5 +58,7 @@ onde
 Para o correto funcionamento da biblioteca, o seguinte método deve ser executado no `void loop()`
 
 ```c++
- myDevice.handle();
+void loop(){
+	mydevice.handle();
+}
 ```
