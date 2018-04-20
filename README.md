@@ -26,8 +26,8 @@ void setup(){
 sendo:
 | NOME |TIPO  | DESCRIÇÃO
 |:------:|:------:|:-------:|
-| Serial | char* ||
-|Host|char*|
+| Serial | char* |*em construção*|
+|Host|char*|*em construção*|
 |Port|int|Porta de comunicação |
 |Post|int|Nome do evento que irá receber os dados
 
@@ -44,15 +44,15 @@ void setup(){
 onde
 | NOME |TIPO  | DESCRIÇÃO
 |:----:|:----:|:-----:|
-| Key| char* ||
-|Is Sync|bool|*true* se o dispositivo se comunicar com o servidor de forma síncrona.
-|Deadband|int|
-|Timeout| int|
-|Is Digital| bool|*true* se o dispositivo for digital, *false* se for analógico.
-|Is Acumm|bool| *true* se o dispositivo for do tipo acumulador.
-|Label|char*|
-|Valor| double| Dado coletado do ambiente pelo sensor.
-|Unit|char*| Unidade referente ao valor enviado.
+| Key| char* |*em construção*|
+|Is Sync|bool|*true* se o dispositivo se comunicar com o servidor de forma síncrona.|
+|Deadband|int|*em construção*|
+|Timeout| int|*em construção*|
+|Is Digital| bool|*true* se o dispositivo for digital, *false* se for analógico.|
+|Is Acumm|bool| *true* se o dispositivo for do tipo acumulador.|
+|Label|char*|*em construção*|
+|Valor| double| Dado coletado do ambiente pelo sensor.|
+|Unit|char*| Unidade referente ao valor enviado.|
 
 ### Loop
 Para o correto funcionamento da biblioteca, o seguinte método deve ser executado no `void loop()`
