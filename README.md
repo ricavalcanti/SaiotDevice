@@ -36,7 +36,10 @@ sendo:
 ### Adicionar sensores
 Os sensores do seu dispositivo podem ser adicionados por meio do seguinte método
 ```c++
-mydevice.addSensors(key,isSync,deadband,timeout,isDigital,isAcumm,label,valor,unit);
+void setup(){
+[...]
+	mydevice.addSensors(key,isSync,deadband,timeout,isDigital,isAcumm,label,valor,unit);
+}
 ```
 onde
 | NOME |TIPO  | DESCRIÇÃO
@@ -50,3 +53,10 @@ onde
 |Label|char*|
 |Valor| double| Dado coletado do ambiente pelo sensor.
 |Unit|char*| Unidade referente ao valor enviado.
+
+### Loop
+Para o correto funcionamento da biblioteca, o seguinte método deve ser executado no `void loop()`
+
+```c++
+ myDevice.handle();
+```
