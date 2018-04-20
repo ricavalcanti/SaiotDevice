@@ -24,6 +24,7 @@ void setup(){
 }
 `````
 sendo:
+
 | NOME |TIPO  | DESCRIÇÃO
 |:------:|:------:|:-------:|
 | Serial | char* |*em construção*|
@@ -42,6 +43,7 @@ void setup(){
 }
 ```
 onde
+
 | NOME |TIPO  | DESCRIÇÃO
 |:----:|:----:|:-----:|
 | Key| char* |*em construção*|
