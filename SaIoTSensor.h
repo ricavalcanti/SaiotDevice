@@ -5,48 +5,55 @@
 
 class SaIoTSensor{
     private:
-        char key[50] =  "Not setted";
-        char label[50] = "Not setted";
-        char unit[50] = "Not setted";
+        char key[50] ;
+        char label[50];
+        char unit[50];
 
-        unsigned long int deadband = 0, timeout = 0, lastTimeout = 0, lastResolution = 0,resolution = 0;
+        unsigned long int deadbandMin = 0,
+        deadbandMax = 0,
+        timeout = 0,
+        lastTimeout = 0,
+        lastResolution = 0,
+        resolution = 0;
         double valor;
-        bool isAcumm = false, isSync = true, isDigital=true;
-        typedef void (*verifyfunct)(void);
+        bool isAcumm = true/*, isSync = true, isDigital=true*/;
+        // typedef void (*verifyfunct)(void);
     public:
         SaIoTSensor();
-        SaIoTSensor(char* _key, bool _isSync, int _deadband, int _timeout, bool _isDigital, bool _isAcumm, char* _label, double _valor, char* _unit);
+        SaIoTSensor(String _key, int _deadbandMin, int _deadbandMax , int _timeout, int _resolution, bool _isAcumm, String _label, String _unit);
         ~SaIoTSensor();
         
         /*****************************************************************************************************************************************************
          * Sensor JSON Functions
         ******************************************************************************************************************************************************/
-        void setKey(char* _key);
-        char* getKey(void);
+        void setKey(String _key);
+        String getKey(void);
 
         void setSyncCommunication(bool _isSync);
         bool isSyncCommunication(void);
 
-        void setDeadBand(int _deadband);
-        int getDeadBand(void);
+        void setDeadBandMin(int _deadbandMin);
+        int  getDeadBandMin(void);
+        void setDeadBandMax(int _deadbandMax);
+        int  getDeadBandMax(void);
 
         void setTimeout(int _timeout);
         int getTimeout(void);
 
-        void setDigitalDevice(bool _isDigital);
-        bool isDigitalDevice(void);
+        // void setDigitalDevice(bool _isDigital);
+        // bool isDigitalDevice(void);
 
         void setAcummulate(bool _isAcummulate);
         bool isAcummulate(void);
 
-        void setLabel(char* _keylabel);
-        char* getLabel(void);
+        void setLabel(String _keylabel);
+        String getLabel(void);
 
         void setValor(double _valor);
         double getValor(void);
 
-        void setUnit(char* _unit);
-        char* getUnit(void);
+        void setUnit(String _unit);
+        String getUnit(void);
 
         void setResolution(unsigned long _resolution);
         unsigned long getResolution(void);

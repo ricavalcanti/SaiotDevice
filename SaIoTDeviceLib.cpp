@@ -1,26 +1,53 @@
 #include"SaIoTDeviceLib.h"
 
-void SaIoTDeviceLib::start(char* _serial, protocol _protocol, char* _host, int _port, char* post){
+void SaIoTDeviceLib::start(String _serial){
+  setSerial(_serial);
+  
+  WiFiManager wifi;
+  wifi.autoConnect();
+  Serial.print(F("[SaIoT] connected to "));
+  Serial.println(WiFi.SSID());
+
+  String JSON = "{\"dados\":[{\"serial\":\"" + serial + "\"}],\"data_hora\":\"2018-04-03 01:00:01\",\"sinal\":-55,\"codigo\":1,\"mensagem\":\"Reiniciando\",\"ip\":\"192.168.0.59\"}";
+  // StaticJsonBuffer<50> jsonBuffer;
+  // JsonObject& root = jsonBuffer.createObject();
+  // root["serial"] = serial;
+  // root.printTo(JSON);
+  // Serial.println(JSON); //DEBUG
+
+  // ws = new SocketIOClient;
+
+  // if (!ws->connect(host, port)){
+  //   Serial.println(F("[SaIoT] connection device-server failed"));
+  //   return;
+  // }
+  // else if (ws->connected()){
+  //   Serial.println(F("[SaIoT] connection device-server established"));
+  //   String route = host + erro;
+  //   ws->emit(route, JSON);
+  // }
+
+  HTTPClient http;
+  String route = host + erro;
+  Serial.println("----------------------");
+  Serial.println(route);
+  http.begin(route);
+  http.addHeader("Content-Type", "application/json");
+  Serial.println(http.POST(JSON));
+  String payload = "Payload: " + http.getString();
+  http.end();
+  Serial.flush();
+}
+
+
+void SaIoTDeviceLib::start(String _serial, protocol _protocol, String _host, int _port){
   setSerial(_serial);
   setHost(_host);
   setPort(_port);
   
-  // switch(_protocol){
-  //  case WS:
-    //  break;
-    // case HTTP:
-    //  Serial.println(F("[SaIoT] HTTP choosed - not setted"));
-    //  // httpClient = new httpClient;
-    //  break;
-    // case MQTT:
-    //  Serial.println(F("[SaIoT] MQTT choosed - not setted"));
-    //  break;
-    // }
-
-  //Uncoment to always open mode AP
-  //wifi.startConfigPortal();
   WiFiManager wifi;
-  wifi.autoConnect(_serial);
+  wifi.autoConnect();
+  // wifi.autoConnect(getSerial());
   Serial.print(F("[SaIoT] connected to "));
   Serial.println(WiFi.SSID());
 
@@ -33,118 +60,122 @@ void SaIoTDeviceLib::start(char* _serial, protocol _protocol, char* _host, int _
   
   Serial.println(JSON); //DEBUG
   
-  switch(_protocol){
-    case WS:
-      ws = new SocketIOClient;
+  ws = new SocketIOClient;
       /*
       aqui vai a parte do vetor de ponteiros
       para atribuição do on
       */
-      for (int i = 0; i < qtdControllers; ++i){
+      // for (int i = 0; i < qtdControllers; ++i){
        //paranauê dos json (a definir);
 
 
 
        //ws.on(variave_contendo_keys,ponteiro_da_funcao);
       // ws->on("atuar", callback);
-      }
+      // }
 
-      if (!ws->connect(_host, _port)){
-        Serial.println(F("[SaIoT] connection device-server failed"));
-        return;
-      }
-      else if (ws->connected()){
-        Serial.println(F("[SaIoT] connection device-server established"));
-        ws->emit(post, JSON);
-      }
-      Serial.flush();
-      break;
+  if (!ws->connect(_host, _port)){
+    Serial.println(F("[SaIoT] connection device-server failed"));
+    return;
+  }
+  else if (ws->connected()){
+    Serial.println(F("[SaIoT] connection device-server established"));
+    String route = host + erro;
+    ws->emit(route, JSON);
+  }
+  Serial.flush();
+  /*
+      // break;
 
   //  case HTTP:
   //    Serial.println(F("[SaIoT] HTTP choosed - not setted"));
   //    break;
-    case MQTT:
-      WiFiClient espClient;
-      mqttClient = new PubSubClient;
-      mqttClient->setClient(espClient);
-      mqttClient->setServer(_host, _port);
-      for (int i = 0; i < qtdControllers; ++i){
+    // case MQTT:
+    //   WiFiClient espClient;
+    //   mqttClient = new PubSubClient;
+    //   mqttClient->setClient(espClient);
+    //   mqttClient->setServer(_host, _port);
+    //   for (int i = 0; i < qtdControllers; ++i){
       //paranauê dos json (a definir);
       //ws.on(variave_contendo_keys,ponteiro_da_funcao);
       // ws->on("atuar", callback);
-      }
+      // }
 
-    mqttClient->connect(_serial);
-    if (!(mqttClient->connected())){
-      Serial.println(F("[SaIoT] connection device-server failed"));
-      return;
-    }
-    else if (mqttClient->connected()){
-      Serial.println(F("[SaIoT] connection device-server established"));
-      mqttClient->publish(post, JSON.c_str());
-    }
-    Serial.flush();
-    break;
-  }
-
+  //   mqttClient->connect(_serial);
+  //   if (!(mqttClient->connected())){
+  //     Serial.println(F("[SaIoT] connection device-server failed"));
+  //     return;
+  //   }
+  //   else if (mqttClient->connected()){
+  //     Serial.println(F("[SaIoT] connection device-server established"));
+  //     mqttClient->publish(post, JSON.c_str());
+  //   }
+  //   Serial.flush();
+  //   break;
+  // }
+  */
 }
 
 void SaIoTDeviceLib::handle(void){
-  switch(_protocol){
-    case WS:
+  // switch(_protocol){
+    // case WS:
     ws->monitor();
-    break;
+    // break;
 
-    case HTTP: Serial.println(F("[SaIoT] HTTP loop - not setted"));
-    case MQTT: Serial.println(F("[SaIoT] MQTT loop - not setted"));
-  }
+  //   case HTTP: Serial.println(F("[SaIoT] HTTP loop - not setted"));
+  //   case MQTT: Serial.println(F("[SaIoT] MQTT loop - not setted"));
+  // }
 }
 
-void SaIoTDeviceLib::setName(char* _name){
-  size_t index = 0;//testar byte;
-  while(*_name)
-  {
-    name[index++] = *_name;
-    *_name++;
-  }
+void SaIoTDeviceLib::setName(String _name){
+  // size_t index = 0;//testar byte;
+  // while(*_name)
+  // {
+  //   name[index++] = *_name;
+  //   *_name++;
+  // }
+  name = _name;
 }
-char* SaIoTDeviceLib::getName(void){
+String SaIoTDeviceLib::getName(void){
   return name;
 }
 
-void SaIoTDeviceLib::setSerial(char* _serial){
-  size_t index = 0;//testar byte;
-  while(*_serial){
-    serial[index++] = *_serial++;
-  }
+void SaIoTDeviceLib::setSerial(String _serial){
+  // size_t index = 0;//testar byte;
+  // while(*_serial){
+  //   serial[index++] = *_serial++;
+  // }
+  serial = _serial;
 }
-char* SaIoTDeviceLib::getSerial(void){
+String SaIoTDeviceLib::getSerial(void){
   return serial;
 }
 
-void SaIoTDeviceLib::setIp(char* _ip){
- size_t index = 0;//testar byte;
-  while(*_ip)
-  {
-    ip[index++] = *_ip++;
-    // _ip++;
-  }
+// void SaIoTDeviceLib::setIp(String _ip){
+//  // size_t index = 0;//testar byte;
+//  //  while(*_ip)
+//  //  {
+//  //    ip[index++] = *_ip++;
+//  //    // _ip++;
+//  //  }
+
+// }
+
+// String SaIoTDeviceLib::getIp(void){
+//  return ip;
+// }
+
+void SaIoTDeviceLib::setHost(String _host){
+ // size_t index = 0;//testar byte;
+ //  while(*_host)
+ //  {
+ //    host[index++] = *_host++;
+ //    // _ip++;
+ //  }
+  host = _host;
 }
 
-char* SaIoTDeviceLib::getIp(void){
- return ip;
-}
-
-void SaIoTDeviceLib::setHost(char* _host){
- size_t index = 0;//testar byte;
-  while(*_host)
-  {
-    host[index++] = *_host++;
-    // _ip++;
-  }
-}
-
-char* SaIoTDeviceLib::getHost(void){
+String SaIoTDeviceLib::getHost(void){
  return host;
 }
 
@@ -156,29 +187,29 @@ int SaIoTDeviceLib::getPort(void){
  return port;
 }
 
-void SaIoTDeviceLib::addSensor(String _key, bool _isSync, int _deadband, int _timeout, bool _isDigital, bool _isAcumm, String _label, double _valor, String _unit){
-  sensor[qtdSensors++] = new SaIoTSensor( _key,_isSync,_deadband,_timeout,_isDigital,_isAcumm,_label,_valor,_unit);
+void SaIoTDeviceLib::addSensor(String _key, int _deadbandMin, int _deadbandMax , int _timeout, int _resolution, bool _isAcumm, String _label, String _unit){
+  sensors[sensorIndex++] = new SaIoTSensor( _key, _deadbandMin, _deadbandMax , _timeout, _resolution, _isAcumm, _label, _unit);
  }
 
-void SaIoTDeviceLib::addController(String _key, String _type, String _label, double _min, double _step, double _max){
-  controllers[qtdControllers++] = new SaIoTController(_key, _type, _label, _min, _step, _max);
- }
+// void SaIoTDeviceLib::addController(String _key, String _type, String _label, double _min, double _step, double _max){
+//   controllers[qtdControllers++] = new SaIoTController(_key, _type, _label, _min, _step, _max);
+//  }
+
  
 
-
-// void SaIoTDeviceLib::setUser(char* user){
+// void SaIoTDeviceLib::setUser(String user){
 //   _usuario = user;
 // }
 
-// char* SaIoTDeviceLib::getUser(void){
+// String SaIoTDeviceLib::getUser(void){
 //   return _usuario;
 // }
 
-// void SaIoTDeviceLib::setUserPassword(char* password){
+// void SaIoTDeviceLib::setUserPassword(String password){
 
 // }
 
-// char* SaIoTDeviceLib::getUserPassword(void){
+// String SaIoTDeviceLib::getUserPassword(void){
 //   return _senhaUsuario;
 // }
 // void SaIoTDeviceLib::setProtocol(protocol protocolType){
@@ -189,14 +220,14 @@ void SaIoTDeviceLib::addController(String _key, String _type, String _label, dou
 //  return _protocol;
 // }
 
-// char* SaIoTDeviceLib::getSensors(void){
+// String SaIoTDeviceLib::getSensors(void){
 //  return sensor;
 // }
 
-// void SaIoTDeviceLib::setControler(char* _controler){
+// void SaIoTDeviceLib::setControler(String _controler){
 
 // }
 
-// char* SaIoTDeviceLib::getControler(void){
+// String SaIoTDeviceLib::getControler(void){
 
 // }

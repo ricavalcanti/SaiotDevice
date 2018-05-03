@@ -1,73 +1,73 @@
-#include "SaIoTController.h"
+// #include "SaIoTController.h"
 
-SaIoTController::SaIoTController(String _key, String _type, String _label, double _min, double _step, double _max){
-  setKey(_key);
-  setType(_type);
-  setLabel(_label);
-  setInterval(_min,_step,_max);
-}
+// SaIoTController::SaIoTController(String _key, String _type, String _label, double _min, double _step, double _max){
+//   setKey(_key);
+//   setType(_type);
+//   setLabel(_label);
+//   setInterval(_min,_step,_max);
+// }
 
-  void SaIoTController::setKey(String _key){
-  size_t size = _key.length();
-  for (size_t a=0; a<=64 && a<=size ;a++)
-    {
-      key[a] = char(_key[a]);
-    }
-  }
+//   void SaIoTController::setKey(String _key){
+//   size_t size = _key.length();
+//   for (size_t a=0; a<=64 && a<=size ;a++)
+//     {
+//       key[a] = char(_key[a]);
+//     }
+//   }
 
-  String SaIoTController::getKey(void){
-    return key;
-  }
+//   String SaIoTController::getKey(void){
+//     return key;
+//   }
 
-  void SaIoTController::setType(String _type){
-  	size_t size = _type.length();
-  	for (size_t a=0; a<=64 && a<=size ;a++)
-      {
-        type[a] = char(_type[a]);
-      }
-  }
+//   void SaIoTController::setType(String _type){
+//   	size_t size = _type.length();
+//   	for (size_t a=0; a<=64 && a<=size ;a++)
+//       {
+//         type[a] = char(_type[a]);
+//       }
+//   }
 
-  String SaIoTController::getType(void){
-    return type;
-  }
+//   String SaIoTController::getType(void){
+//     return type;
+//   }
 
-void SaIoTController::setLabel(String _label){
-  size_t size = _label.length();
-  for (size_t a=0; a<=64 && a<=size ;a++)
-  {
-    label[a] = char(_label[a]);
-  }
-  }
+// void SaIoTController::setLabel(String _label){
+//   size_t size = _label.length();
+//   for (size_t a=0; a<=64 && a<=size ;a++)
+//   {
+//     label[a] = char(_label[a]);
+//   }
+//   }
 
-  String SaIoTController::getLabel(void){
-    return label;
-  }
+//   String SaIoTController::getLabel(void){
+//     return label;
+//   }
 
-  void SaIoTController::setInterval(double _min,double _step,double _max){
-    min  = _min;
-    step = _step;
-    max  = _max;
-  }
+//   void SaIoTController::setInterval(double _min,double _step,double _max){
+//     min  = _min;
+//     step = _step;
+//     max  = _max;
+//   }
 
-  void SaIoTController::setMin(double _min){
-     min = _min;
-  }
-  void SaIoTController::setMax(double _max){
-    max = _max;
-  }
+//   void SaIoTController::setMin(double _min){
+//      min = _min;
+//   }
+//   void SaIoTController::setMax(double _max){
+//     max = _max;
+//   }
 
-  void SaIoTController::setStep(double _step){
-    step = _step;
-  }
+//   void SaIoTController::setStep(double _step){
+//     step = _step;
+//   }
 
-  double SaIoTController::getMin(void){
-    return min;
-  }
+//   double SaIoTController::getMin(void){
+//     return min;
+//   }
 
-  double SaIoTController::getMax(void){
-    return max;
-  }
+//   double SaIoTController::getMax(void){
+//     return max;
+//   }
 
-  double SaIoTController::getStep(void){
-    return step;
-  }
+//   double SaIoTController::getStep(void){
+//     return step;
+//   }
