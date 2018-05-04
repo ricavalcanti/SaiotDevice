@@ -8,7 +8,6 @@ void SaIoTDeviceLib::start(String _serial){
   Serial.print(F("[SaIoT] connected to "));
   Serial.println(WiFi.SSID());
 
-  String JSON = "{\"dados\":[{\"serial\":\"" + serial + "\"}],\"data_hora\":\"2018-04-03 01:00:01\",\"sinal\":-55,\"codigo\":1,\"mensagem\":\"Reiniciando\",\"ip\":\"192.168.0.59\"}";
   // StaticJsonBuffer<50> jsonBuffer;
   // JsonObject& root = jsonBuffer.createObject();
   // root["serial"] = serial;
@@ -27,15 +26,7 @@ void SaIoTDeviceLib::start(String _serial){
   //   ws->emit(route, JSON);
   // }
 
-  HTTPClient http;
-  String route = host + erro;
   Serial.println("----------------------");
-  Serial.println(route);
-  http.begin(route);
-  http.addHeader("Content-Type", "application/json");
-  Serial.println(http.POST(JSON));
-  String payload = "Payload: " + http.getString();
-  http.end();
   Serial.flush();
 }
 
@@ -187,12 +178,16 @@ int SaIoTDeviceLib::getPort(void){
  return port;
 }
 
-void SaIoTDeviceLib::addSensor(String _key, int _deadbandMin, int _deadbandMax , int _timeout, int _resolution, bool _isAcumm, String _label, String _unit){
-  sensors[sensorIndex++] = new SaIoTSensor( _key, _deadbandMin, _deadbandMax , _timeout, _resolution, _isAcumm, _label, _unit);
+void SaIoTDeviceLib::addSensor(String _key, int _deadbandMin, int _deadbandMax , int _timeout, int _resolution, bool _isAcumm, String _tag, String _unit){
+  sensors[sensorIndex++] = new SaIoTSensor( _key, _deadbandMin, _deadbandMax , _timeout, _resolution, _isAcumm, _tag, _unit);
  }
 
-// void SaIoTDeviceLib::addController(String _key, String _type, String _label, double _min, double _step, double _max){
-//   controllers[qtdControllers++] = new SaIoTController(_key, _type, _label, _min, _step, _max);
+
+void SaIoTDeviceLib::addSensor(String _key, String _unit){
+  sensors[sensorIndex++] = new SaIoTSensor( _key, _unit);
+ }
+// void SaIoTDeviceLib::addController(String _key, String _type, String _tag, double _min, double _step, double _max){
+//   controllers[qtdControllers++] = new SaIoTController(_key, _type, _tag, _min, _step, _max);
 //  }
 
  

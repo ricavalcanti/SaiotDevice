@@ -5,13 +5,13 @@
 
 class SaIoTSensor{
     private:
-        char key[50] ;
-        char label[50];
-        char unit[50];
+        String key;
+        String tag;
+        String unit;
 
         unsigned long int deadbandMin = 0,
         deadbandMax = 0,
-        timeout = 0,
+        timeout = 5000,/* 5 segundos = 5 * 1000 milissegundos */
         lastTimeout = 0,
         lastResolution = 0,
         resolution = 0;
@@ -20,7 +20,8 @@ class SaIoTSensor{
         // typedef void (*verifyfunct)(void);
     public:
         SaIoTSensor();
-        SaIoTSensor(String _key, int _deadbandMin, int _deadbandMax , int _timeout, int _resolution, bool _isAcumm, String _label, String _unit);
+        SaIoTSensor(String _key, int _deadbandMin, int _deadbandMax, int _timeout, int _resolution,  bool _isAcumm, String _tag, String _unit);
+        SaIoTSensor(String _key, String _unit);
         ~SaIoTSensor();
         
         /*****************************************************************************************************************************************************
@@ -46,8 +47,8 @@ class SaIoTSensor{
         void setAcummulate(bool _isAcummulate);
         bool isAcummulate(void);
 
-        void setLabel(String _keylabel);
-        String getLabel(void);
+        void setTag(String _keytag);
+        String getTag(void);
 
         void setValor(double _valor);
         double getValor(void);

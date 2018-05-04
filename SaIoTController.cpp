@@ -1,9 +1,9 @@
 #include "SaIoTController.h"
 
-SaIoTController::SaIoTController(String _key, String _type, String _label, String _description){//, double _min, double _step, double _max){
+SaIoTController::SaIoTController(String _key, String _type, String _tag, String _description){//, double _min, double _step, double _max){
   setKey(_key);
   setType(_type);
-  setLabel(_label);
+  setTag(_tag);
   setDescription(_description);
   //setInterval(_min,_step,_max);
 }
@@ -36,10 +36,10 @@ SaIoTController::SaIoTController(String _key, String _type, String _label, Strin
 
 void SaIoTController::setTag(String _tag){
   tag = _tag;
-  // size_t size = _label.length();
+  // size_t size = _tag.length();
   // for (size_t a=0; a<=64 && a<=size ;a++)
   // {
-  //   label[a] = char(_label[a]);
+  //   tag[a] = char(_tag[a]);
   // }
   }
 

@@ -10,8 +10,9 @@
 
 #include "SaIoTSensor.h"
 // #include "SaIoTController.h"
+#ifndef qtdSensors
 #define qtdSensors 1
-
+#endif
 
 enum protocol{
   WS,
@@ -61,7 +62,8 @@ class SaIoTDeviceLib {
     void setPort(int _port);
     int getPort(void);
 
-    void addSensor(String _key, int _deadbandMin, int _deadbandMax , int _timeout, int _resolution, bool _isAcumm, String _label, String _unit);
+    void addSensor(String _key, int _deadbandMin, int _deadbandMax , int _timeout, int _resolution, bool _isAcumm, String _tag, String _unit);
+    void addSensor(String _key, String _unit);
     // String getSensors(void);
 
     // void setControler(String _controler);

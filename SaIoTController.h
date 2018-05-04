@@ -6,10 +6,10 @@
 
 class SaIoTController{
     private:
-      char key[5] = "";
-      char type[20] = "";
-      char tag[50] = "Not setted";
-      char description[150] ="Not setted";
+      String key;
+      String type;
+      String tag;
+      String description;
 
       //VAI CONTINUAR TENDO ESSAS VARIÁVEIS NO CONTROLLER?
       //double min=0,max=1,step=0.01;
