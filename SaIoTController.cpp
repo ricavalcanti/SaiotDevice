@@ -2,6 +2,7 @@
 
 SaIoTController::SaIoTController(String _key){
   setKey(_key);
+  setInterval(0,0,0);
 }
 
 SaIoTController::~SaIoTController(){}
