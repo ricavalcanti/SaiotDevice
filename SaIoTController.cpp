@@ -1,11 +1,17 @@
 #include "SaIoTController.h"
 
-SaIoTController::SaIoTController(String _key, String _type, String _label, String _description){//, double _min, double _step, double _max){
+SaIoTController::SaIoTController(String _key){
+  setKey(_key);
+}
+
+SaIoTController::~SaIoTController(){}
+
+SaIoTController::SaIoTController(String _key, String _type, String _tag, String _description, double _min, double _step, double _max){
   setKey(_key);
   setType(_type);
-  setLabel(_label);
+  setTag(_tag);
   setDescription(_description);
-  //setInterval(_min,_step,_max);
+  setInterval(_min,_step,_max);
 }
 
   void SaIoTController::setKey(String _key){
@@ -56,31 +62,31 @@ String SaIoTController::getDescription(void){
   return description;
 }
 
-  // void SaIoTController::setInterval(double _min,double _step,double _max){
-  //   min  = _min;
-  //   step = _step;
-  //   max  = _max;
-  // }
+  void SaIoTController::setInterval(double _min,double _step,double _max){
+    min  = _min;
+    step = _step;
+    max  = _max;
+  }
 
-  // void SaIoTController::setMin(double _min){
-  //    min = _min;
-  // }
-  // void SaIoTController::setMax(double _max){
-  //   max = _max;
-  // }
+  void SaIoTController::setMin(double _min){
+     min = _min;
+  }
+  void SaIoTController::setMax(double _max){
+    max = _max;
+  }
 
-  // void SaIoTController::setStep(double _step){
-  //   step = _step;
-  // }
+  void SaIoTController::setStep(double _step){
+    step = _step;
+  }
 
-  // double SaIoTController::getMin(void){
-  //   return min;
-  // }
+  double SaIoTController::getMin(void){
+    return min;
+  }
 
-  // double SaIoTController::getMax(void){
-  //   return max;
-  // }
+  double SaIoTController::getMax(void){
+    return max;
+  }
 
-  // double SaIoTController::getStep(void){
-  //   return step;
-  // }
+  double SaIoTController::getStep(void){
+    return step;
+  }
