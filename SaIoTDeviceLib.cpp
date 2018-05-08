@@ -1,6 +1,6 @@
 #include"SaIoTDeviceLib.h"
 SaIoTDeviceLib::SaIoTDeviceLib(String _name, String _serial, String _host, String _post, String _erro, int _port){
-
+//ESPERANDO ATUALIZAÇÃO DOS SENSOR POR PATRICIO
   name = _name;
   serial = _serial;
   host = _host;

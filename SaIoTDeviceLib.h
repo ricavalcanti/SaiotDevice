@@ -1,6 +1,6 @@
 #ifndef SaIoTDeviceLib_h
 #define SaIoTDeviceLib_h
-
+//ESPERANDO ATUALIZAÇÃO DOS SENSOR POR PATRICIO
 #include <Arduino.h>
 #include <WiFiManager.h>
 #include <SocketIOClient.h>
