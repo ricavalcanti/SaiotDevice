@@ -9,7 +9,7 @@
 // #include <PubSubClient.h> //https://pubsubclient.knolleary.net/api.html
 
 #include "SaIoTSensor.h"
-//#include "SaIoTController.h"
+#include "SaIoTController.h"
 #define qtdSensors 1
 
 
