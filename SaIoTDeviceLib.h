@@ -9,7 +9,7 @@
 // #include <PubSubClient.h> //https://pubsubclient.knolleary.net/api.html
 
 #include "SaIoTSensor.h"
-// #include "SaIoTController.h"
+//#include "SaIoTController.h"
 #define qtdSensors 1
 
 
@@ -27,33 +27,32 @@ class SaIoTDeviceLib {
     // PubSubClient *mqttClient;
     // HTTPClient *http;
 
-    String serial = "";
-    String ip =  "";
     String name =  "";
+    String serial = "";
     String host = "http://api.saiot.ect.ufrn.br";
     String post = "/v1/history/hidrometro/";
     String erro = "/v1/history/erro/";
     int port = 80;
-    protocol _protocol = WS;
-    
-    // unsigned char qtdControllers = 1;
+    protocol _protocol = WS;//olhar dps 
+
     unsigned int sensorIndex = 0;
+    //unsigned int controllerIndex = 0;
     SaIoTSensor* sensors[qtdSensors];
     //SaIoTController controllers[qtdControllers];
   public:
     /* criar um construtor  e passar a start para o produto talvez*/
+    //Editar após discussão de conexão 
+    SaIoTDeviceLib(String _name, String _serial, String _host, String _post, String _erro, int _port); 
+    
     void start(String serial);
     void start(String serial, protocol _protocol, String _host, int _port);
-    void handle(void);
+    
 
     void setName(String _name);
     String getName(void);
 
     void setSerial(String _serial);
     String getSerial(void);
-
-    // void setIp(String _ip);
-    // String getIp(void);
 
     void setHost(String _host);
     String getHost(void);
@@ -64,8 +63,6 @@ class SaIoTDeviceLib {
     void addSensor(String _key, int _deadbandMin, int _deadbandMax , int _timeout, int _resolution, bool _isAcumm, String _label, String _unit);
     // String getSensors(void);
 
-    // void setControler(String _controler);
-    // String getControler(void);
     // void setProtocol(protocol _protocol);
     // protocol getProtocol(void);
 

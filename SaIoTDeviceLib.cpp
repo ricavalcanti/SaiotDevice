@@ -1,5 +1,14 @@
 #include"SaIoTDeviceLib.h"
+SaIoTDeviceLib::SaIoTDeviceLib(String _name, String _serial, String _host, String _post, String _erro, int _port){
 
+  name = _name;
+  serial = _serial;
+  host = _host;
+  post = _post;
+  erro = _erro;
+  port = _port;
+
+};
 void SaIoTDeviceLib::start(String _serial){
   setSerial(_serial);
   
@@ -116,16 +125,6 @@ void SaIoTDeviceLib::start(String _serial, protocol _protocol, String _host, int
   */
 }
 
-void SaIoTDeviceLib::handle(void){
-  // switch(_protocol){
-    // case WS:
-    ws->monitor();
-    // break;
-
-  //   case HTTP: Serial.println(F("[SaIoT] HTTP loop - not setted"));
-  //   case MQTT: Serial.println(F("[SaIoT] MQTT loop - not setted"));
-  // }
-}
 
 void SaIoTDeviceLib::setName(String _name){
   // size_t index = 0;//testar byte;
@@ -150,20 +149,6 @@ void SaIoTDeviceLib::setSerial(String _serial){
 String SaIoTDeviceLib::getSerial(void){
   return serial;
 }
-
-// void SaIoTDeviceLib::setIp(String _ip){
-//  // size_t index = 0;//testar byte;
-//  //  while(*_ip)
-//  //  {
-//  //    ip[index++] = *_ip++;
-//  //    // _ip++;
-//  //  }
-
-// }
-
-// String SaIoTDeviceLib::getIp(void){
-//  return ip;
-// }
 
 void SaIoTDeviceLib::setHost(String _host){
  // size_t index = 0;//testar byte;
