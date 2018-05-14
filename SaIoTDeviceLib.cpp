@@ -9,6 +9,8 @@ SaIoTDeviceLib::SaIoTDeviceLib(String _name, String _serial, String _host, Strin
   erro = _erro;
   port = _port;
 };
+SaIoTDeviceLib::SaIoTDeviceLib(){
+};
 void SaIoTDeviceLib::start(String _serial)
 {
   setSerial(_serial);
@@ -168,6 +170,10 @@ int SaIoTDeviceLib::getPort(void)
   return port;
 }
 
+void SaIoTDeviceLib::addSensor(SaIoTSensor *newSensor)
+{
+  sensors[sensorIndex++] = newSensor;
+}
 void SaIoTDeviceLib::addSensor(String _key, String _unit)
 {
   sensors[sensorIndex++] = new SaIoTSensor(_key, _unit);
@@ -177,6 +183,10 @@ void SaIoTDeviceLib::addSensor(String _key, int _deadbandMin, int _deadbandMax, 
   sensors[sensorIndex++] = new SaIoTSensor(_key, _deadbandMin, _deadbandMax, _timeout, _resolution, _isAcumm, _tag, _unit);
 }
 
+void SaIoTDeviceLib::addController(SaIoTController *newController)
+{
+  controllers[controllerIndex++] = newController;
+}
 void SaIoTDeviceLib::addController(String _key, String _type)
 {
   controllers[controllerIndex++] = new SaIoTController(_key, _type);

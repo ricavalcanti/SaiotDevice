@@ -1,5 +1,5 @@
-#ifndef SaioTProduct_h
-#define SaioTProduct_h
+#ifndef SaIoTProduct_h
+#define SaIoTProduct_h
 
 #include <Arduino.h>
 
@@ -7,7 +7,7 @@
 #define qtdDevices 1
 #endif
 
-#include "SaiotDeviceLib.h"
+#include "SaIotDeviceLib.h"
 
 class SaIoTProduct
 {
