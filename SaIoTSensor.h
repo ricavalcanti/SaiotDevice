@@ -9,6 +9,8 @@ private:
   String key;
   String tag;
   String unit;
+  String type;
+  boolean accumulate;
 
   /* timeout 3 segundos = 3 * 1000 milissegundos */
   unsigned long int deadbandMin = 0,
