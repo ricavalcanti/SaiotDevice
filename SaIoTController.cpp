@@ -108,3 +108,11 @@ double SaIoTController::getStep(void)
 {
   return step;
 }
+
+void SaIoTController::setAction(func_pointer _function){
+  function = _function;
+}
+
+void SaIoTController::toAct(void){
+  function();
+}

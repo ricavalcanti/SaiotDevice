@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 
+typedef void (*func_pointer)(void);
 class SaIoTController
 {
 private:
@@ -12,6 +13,8 @@ private:
   String description;
 
   double min, max, step;
+  func_pointer function;
+
 
 public:
   SaIoTController(String _key, String _type);
@@ -40,5 +43,8 @@ public:
 
   void setStep(double _step);
   double getStep(void);
+
+  void setAction(func_pointer _function);
+  void toAct(void);
 };
 #endif
