@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-typedef void (*func_pointer)(void);
+typedef void (*func_pointer)(String);
 class SaIoTController
 {
 private:
@@ -45,6 +45,5 @@ public:
   double getStep(void);
 
   void setAction(func_pointer _function);
-  void toAct(void);
 };
 #endif
