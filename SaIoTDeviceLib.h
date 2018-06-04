@@ -52,6 +52,7 @@ public:
   SaIoTDeviceLib(String _name, String _serial, String _host, String _post, String _erro, int _port);
   SaIoTDeviceLib();
 
+  void start();
   void start(String serial);
   void start(String serial, protocol _protocol, String _host, int _port);
 

@@ -11,9 +11,29 @@ SaIoTDeviceLib::SaIoTDeviceLib(String _name, String _serial, String _host, Strin
 };
 SaIoTDeviceLib::SaIoTDeviceLib(){
 };
+
+void SaIoTDeviceLib::start()
+{
+  //inicia conexão
+  WiFiManager wifi;
+  
+  if (wifi.autoConnect())
+  {
+      Serial.print(F("[SaIoT] connected to "));
+      Serial.println(WiFi.SSID());
+  }else{
+    Serial.println("Não conseguiu conexão");
+  }
+  
+
+
+}
+
 void SaIoTDeviceLib::start(String _serial)
 {
   setSerial(_serial);
+
+  //
 
   WiFiManager wifi;
   wifi.autoConnect();
