@@ -40,7 +40,7 @@ void SaIoTDeviceLib::start(String _serial)
   Serial.print(F("[SaIoT] connected to "));
   Serial.println(WiFi.SSID());
 
-  String JSON = "{\"dados\":[{\"serial\":\"" + serial + "\"}],\"data_hora\":\"2018-04-03 01:00:01\",\"sinal\":-55,\"codigo\":1,\"mensagem\":\"Reiniciando\",\"ip\":\"192.168.0.59\"}";
+  String JSON = "{\"dados\":[{\"serial\":\"" + serial + "\"}],\"data_hora\":\"2018-05-30 01:00:01\",\"sinal\":-55,\"codigo\":1,\"mensagem\":\"Reiniciando\",\"ip\":\"192.168.0.59\"}";
   // StaticJsonBuffer<50> jsonBuffer;
   // JsonObject& root = jsonBuffer.createObject();
   // root["serial"] = serial;
