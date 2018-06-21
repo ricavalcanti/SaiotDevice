@@ -11,7 +11,6 @@ private:
   String type;
   String tag;
   String description;
-  String teste;
 
   double min, max, step;
   func_pointer function;
