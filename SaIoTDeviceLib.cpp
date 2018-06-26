@@ -203,7 +203,7 @@ void SaIoTDeviceLib::addSensor(String _key, int _deadbandMin, int _deadbandMax, 
   sensors[sensorIndex++] = new SaIoTSensor(_key, _deadbandMin, _deadbandMax, _timeout, _resolution, _isAcumm, _tag, _unit);
 }
 
-void SaIoTDeviceLib::addController(SaIoTController *newController)
+/*void SaIoTDeviceLib::addController(SaIoTController *newController)
 {
   controllers[controllerIndex++] = newController;
 }
@@ -214,7 +214,7 @@ void SaIoTDeviceLib::addController(String _key, String _type)
 void SaIoTDeviceLib::addController(String _key, String _type, String _tag, String _description, double _min, double _step, double _max)
 {
   controllers[controllerIndex++] = new SaIoTController(_key, _type, _tag, _description, _min, _step, _max);
-}
+}*/
 
 // void SaIoTDeviceLib::setUser(String user){
 //   _usuario = user;

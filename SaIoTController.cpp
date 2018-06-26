@@ -1,21 +1,20 @@
 #include "SaIoTController.h"
 
+SaIoTController::SaIoTController() {}
+
 SaIoTController::~SaIoTController() {}
 
 SaIoTController::SaIoTController(String _key, String _type)
 {
   setKey(_key);
   setType(_type);
-  setInterval(0, 1, 100);
 }
 
-SaIoTController::SaIoTController(String _key, String _type, String _tag, String _description, double _min, double _step, double _max)
+SaIoTController::SaIoTController(String _key, String _type, String _tag)
 {
   setKey(_key);
   setType(_type);
   setTag(_tag);
-  setDescription(_description);
-  setInterval(_min, _step, _max);
 }
 
 void SaIoTController::setKey(String _key)
@@ -63,7 +62,7 @@ String SaIoTController::getTag(void)
   return tag;
 }
 
-void SaIoTController::setDescription(String _description)
+/*void SaIoTController::setDescription(String _description)
 {
   description = _description;
 }
@@ -107,6 +106,22 @@ double SaIoTController::getMax(void)
 double SaIoTController::getStep(void)
 {
   return step;
+}*/
+void SaIoTController::setJsonConfig(void){
+  jConfExt += ("{\"key\":\"" + key + "\",\"type\":\"" + type + "\",\"tag\":\"" + tag + "\"}");
+}
+
+void SaIoTController::setJsonConfig(String _jConfExt){
+  jConfExt = _jConfExt;
+  //setKey(_jConfExt[key]);
+}
+
+/*void SaIoTController::setJsonConfig(String _jConfExt, String _complement){
+
+}*/
+
+String SaIoTController::getJsonConfig(void){
+  return jConfExt;
 }
 
 void SaIoTController::setAction(func_pointer _function){
