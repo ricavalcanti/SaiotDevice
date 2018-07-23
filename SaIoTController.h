@@ -2,54 +2,34 @@
 #define SaIoTController_h
 
 #include <Arduino.h>
+#include<ArduinoJson.h>
 
-typedef void (*func_pointer)(String);
+typedef void (*func_pointer)(String); //necessario verif
 class SaIoTController
 {
 private:
+  String jConf;
   String key;
-  String type;
-  String tag;
-  //String description;
-  String jConfExt;
 
   //double min, max, step;
   func_pointer function;
+  //void (*func_pointer)(int);
 
 
 public:
   SaIoTController();
-  SaIoTController(String _key, String _type);
-  SaIoTController(String _key, String _type, String _tag);
+  SaIoTController(String _jsonConfig);
+  SaIoTController(String _key, String _tClass);
+  SaIoTController(String _key, String _tClass, String _tag);
   ~SaIoTController();
 
-  void setKey(String _key);
   String getKey(void);
-
-  void setType(String _type);
-  String getType(void);
-
-  void setTag(String _tag);
+  String getClass(void);
   String getTag(void);
+  String getByField(String _field);
 
-  void setJsonConfig(void); //default
-  void setJsonConfig(String _jConfExt);
-  //void setJsonConfig(String _jConfExt, String _complement);
-  String getJsonConfig(void);
-
-  /*void setDescription(String _description);
-  String getDescription(void);
-
-  void setInterval(double _min, double _step, double _max);
-
-  void setMin(double _min);
-  double getMin(void);
-
-  void setMax(double _max);
-  double getMax(void);
-
-  void setStep(double _step);
-  double getStep(void);*/
+  void setJsonConfig(String _jConfExt); 
+  String getJsonConfig(void); //pega todo o json de configuração pra ser enviado ao back
 
   void setAction(func_pointer _function);
 };
