@@ -2,7 +2,73 @@
 
 SaIoTSensor::~SaIoTSensor() {}
 
-SaIoTSensor::SaIoTSensor(String _key, int _deadbandMin, int _deadbandMax, int _timeout, int _resolution, bool _isAcumm, String _tag, String _unit)
+SaIoTSensor::SaIoTSensor(String _jsonConfig){
+    setJsonConfig(_jsonConfig);
+}
+SaIoTSensor::SaIoTSensor(String _key, String _tag, String _unit, String _type){
+    jConf += ("{\"key\":\"" + _key + "\",\"unit\":\"" + _unit + "\",\"type\":\"" + _type + "\",\"tag\":\"" + _tag + "\"}");
+    key = _key;
+}
+String SaIoTSensor::getJsonConfig(void){
+    return jConf;
+}
+String SaIoTSensor::getKey(void){
+    return key;
+}
+String SaIoTSensor::getSerial(void){
+    return serial;
+}
+double SaIoTSensor::getValor(void){
+    return valor;
+}
+String SaIoTSensor::getByField(String _field){
+    int idxField = jConf.indexOf(_field); //field
+	int init, end;
+	
+	if(idxField != -1){
+		init = jConf.indexOf(":", idxField) + 1; 
+		end = jConf.indexOf(",", init);
+		if(end == -1){
+			end = jConf.indexOf("}", init);
+		}
+		return jConf.substring(init,end);
+	}else{
+		return "-1";
+	}
+}
+String SaIoTSensor::getUnit(void){
+    return getByField("unit");
+}
+String SaIoTSensor::getTag(void){
+    return getByField("tag");
+}
+String SaIoTSensor::getType(void){
+    return getByField("type");
+}
+
+//METODOS SET 
+
+void SaIoTSensor::setJsonConfig(String _jsonConfig){
+    jConf = _jsonConfig;
+    key = getByField("key");
+    serial = getByField("serial");
+}
+void SaIoTSensor::setValor(double _valor){
+    valor = _valor;
+}
+
+void verify(void){
+
+}
+
+
+
+
+
+// METODOS ANTIGOS //
+
+
+/*SaIoTSensor::SaIoTSensor(String _key, int _deadbandMin, int _deadbandMax, int _timeout, int _resolution, bool _isAcumm, String _tag, String _unit)
 {
     setKey(_key);
     // setSyncCommunication(_isSync);
@@ -34,7 +100,7 @@ void SaIoTSensor::setKey(String _key)
 String SaIoTSensor::getKey(void)
 {
     return key;
-}
+}*/
 
 // void SaIoTSensor::setSyncCommunication(bool _isSync){
 //     isSync = _isSync;
@@ -44,7 +110,7 @@ String SaIoTSensor::getKey(void)
 //     return isSync;
 // }
 
-void SaIoTSensor::setDeadBandMin(int _deadbandMin)
+/*void SaIoTSensor::setDeadBandMin(int _deadbandMin)
 {
     deadbandMin = _deadbandMin;
 }
@@ -72,7 +138,7 @@ int SaIoTSensor::getTimeout(void)
 {
     return timeout;
 }
-
+*/
 // void SaIoTSensor::setDigitalDevice(bool _isDigital){
 //     isDigital = _isDigital;
 // }
@@ -81,7 +147,7 @@ int SaIoTSensor::getTimeout(void)
 //     return isDigital;
 // }
 
-void SaIoTSensor::setAcummulate(bool _isAcummulate)
+/*void SaIoTSensor::setAcummulate(bool _isAcummulate)
 {
     isAcumm = _isAcummulate;
 }
@@ -144,20 +210,12 @@ void SaIoTSensor::verify(void)
         if ((abs(millis() - lastTimeout) > timeout))
         {
             // send();
-            /* atualiza a variável lastTimeout para o time da última ocorrência do timeout */
-            lastTimeout = millis();
-        }
-    }
-    if (timeout)
-    {
-        if ((abs(millis() - lastTimeout) > timeout))
-        {
-            send();
-            /*atualiza a variável lastTimeout para o time da última ocorrência do timeout*/
+            // atualiza a variável lastTimeout para o time da última ocorrência do timeout 
             lastTimeout = millis();
         }
     }
 }
+*/
 //
 // /* envia ao servidor o json com as informações da leitura do sensor*/
 // int SaIoTSensor::send(void){

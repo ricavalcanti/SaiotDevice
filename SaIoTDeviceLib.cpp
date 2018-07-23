@@ -190,7 +190,7 @@ int SaIoTDeviceLib::getPort(void)
   return port;
 }
 
-void SaIoTDeviceLib::addSensor(SaIoTSensor *newSensor)
+/*void SaIoTDeviceLib::addSensor(SaIoTSensor *newSensor)
 {
   sensors[sensorIndex++] = newSensor;
 }
@@ -201,7 +201,7 @@ void SaIoTDeviceLib::addSensor(String _key, String _unit)
 void SaIoTDeviceLib::addSensor(String _key, int _deadbandMin, int _deadbandMax, int _timeout, int _resolution, bool _isAcumm, String _tag, String _unit)
 {
   sensors[sensorIndex++] = new SaIoTSensor(_key, _deadbandMin, _deadbandMax, _timeout, _resolution, _isAcumm, _tag, _unit);
-}
+}*/
 
 /*void SaIoTDeviceLib::addController(SaIoTController *newController)
 {

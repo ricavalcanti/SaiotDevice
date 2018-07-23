@@ -20,10 +20,10 @@ public:
   SaIoTController();
   SaIoTController(String _jsonConfig);
   SaIoTController(String _key, String _tClass);
-  SaIoTController(String _key, String _tClass, String _tag);
+  SaIoTController(String _key, String _tClass, String _tag); //campos obrigatorios p/ o server
   ~SaIoTController();
 
-  String getKey(void);
+  String getKey(void); //unico necessário p se reportar ao server, fora o cadastro
   String getClass(void);
   String getTag(void);
   String getByField(String _field);

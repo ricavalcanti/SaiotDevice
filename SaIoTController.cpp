@@ -54,7 +54,7 @@ String SaIoTController::getByField(String _field){
 
 void SaIoTController::setJsonConfig(String _jConf){
   jConf = _jConf;
-  key = getKey();
+  key = getByField("key");
 
 }
 

@@ -68,9 +68,9 @@ public:
   void setPort(int _port);
   int getPort(void);
 
-  void addSensor(SaIoTSensor *newSensor);
+  /*void addSensor(SaIoTSensor *newSensor);
   void addSensor(String _key, int _deadbandMin, int _deadbandMax, int _timeout, int _resolution, bool _isAcumm, String _label, String _unit);
-  void addSensor(String _key, String _unit);
+  void addSensor(String _key, String _unit);*/
 
  /* void addController(SaIoTController *newController);
   void addController(String _key, String _type);
