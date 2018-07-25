@@ -26,8 +26,8 @@ String SaIoTSensor::getByField(String _field){
 	int init, end;
 	
 	if(idxField != -1){
-		init = jConf.indexOf(":", idxField) + 1; 
-		end = jConf.indexOf(",", init);
+		init = jConf.indexOf(":", idxField) + 2; 
+		end = jConf.indexOf("\"", init);
 		if(end == -1){
 			end = jConf.indexOf("}", init);
 		}
