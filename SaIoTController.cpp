@@ -23,7 +23,7 @@ SaIoTController::SaIoTController(String _key, String _tClass, String _tag)
 
 String SaIoTController::getKey(void)
 {
-  return getByField("key");
+  return key;
 }
 
 String SaIoTController::getClass(void)
@@ -37,17 +37,22 @@ String SaIoTController::getTag(void)
 }
 
 String SaIoTController::getByField(String _field){
-	int idxField = jConf.indexOf(_field); //field
+  int idxField = jConf.indexOf(_field); //field
 	int init, end;
 	
 	if(idxField != -1){
-		init = jConf.indexOf(":", idxField) + 2; 
-		end = jConf.indexOf("\"", init);
-		if(end == -1){
-			end = jConf.indexOf("}", init);
-		}
-		return jConf.substring(init,end);
-	}else{
+		init = jConf.indexOf(":", idxField) + 1; 
+    if(jConf[init] == '\"'){ //nesse caso o dado sera string e precisamos que o index aponte para o inicio do dado
+      init = init+1;
+      end = jConf.indexOf("\"", init);
+    }else{//nesse caso o dado sera um valor numerico
+      end = jConf.indexOf(",", init);
+      if(end == -1){ //nesse caso o dado se encontra no final do JSON
+			    end = jConf.indexOf("}", init);
+          }
+		  }
+    return jConf.substring(init,end); 
+  }else{ //caso o campo n seja encontrado
 		return "-1";
 	}
 }
