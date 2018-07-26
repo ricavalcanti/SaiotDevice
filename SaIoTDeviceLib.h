@@ -3,9 +3,9 @@
 //ESPERANDO ATUALIZAÇÃO DOS SENSOR POR PATRICIO
 #include <Arduino.h>
 #include <WiFiManager.h>
-#include <SocketIOClient.h>
-#include <ArduinoJson.h>
-#include <ESP8266HTTPClient.h>
+//#include <SocketIOClient.h>
+//#include <ArduinoJson.h>
+//#include <ESP8266HTTPClient.h>
 // #include <PubSubClient.h> //https://pubsubclient.knolleary.net/api.html
 
 #include "SaIoTSensor.h"
