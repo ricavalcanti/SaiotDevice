@@ -27,12 +27,17 @@ String SaIoTSensor::getByField(String _field){
 	
 	if(idxField != -1){
 		init = jConf.indexOf(":", idxField) + 1; 
-		end = jConf.indexOf(",", init);
-		if(end == -1){
-			end = jConf.indexOf("}", init);
-		}
-		return jConf.substring(init,end);
-	}else{
+    if(jConf[init] == '\"'){ //nesse caso o dado sera string e precisamos que o index aponte para o inicio do dado
+      init = init+1;
+      end = jConf.indexOf("\"", init);
+    }else{//nesse caso o dado sera um valor numerico
+      end = jConf.indexOf(",", init);
+      if(end == -1){ //nesse caso o dado se encontra no final do JSON
+			    end = jConf.indexOf("}", init);
+        }
+	}
+    return jConf.substring(init,end); 
+    }else{ //caso o campo n seja encontrado
 		return "-1";
 	}
 }
@@ -60,33 +65,46 @@ void SaIoTSensor::setValue(double _value){
 void SaIoTSensor::verify(void){
     if(deadband != NULL_VALUE){
         if(exceededDeadband(deadband)){
-            sendValue()
+            sendValue();
         }
     }
     if(timeout != NULL_VALUE){
         if(exceededTimeout(timeout)){
-            sendValue()
+            sendValue();
         }
     }
     if(resolution != NULL_VALUE){
         if(exceededResolution(resolution)){
-            sendValue()
+            sendValue();
         }
     }
 }
 
-bool SaIoTSensor::exceededDeadband(unsigned long int deadband){
-    (value>deadband)? return true : return false;
+bool SaIoTSensor::exceededDeadband(long int deadband){
+    bool ret = value>deadband ? true : false;
+    return ret;
 }
-bool SaIoTSensor::exceededTimeout(unsigned long int timeout){
+bool SaIoTSensor::exceededTimeout(long int timeout){
     unsigned long int currentTime = millis();
-    ((currentTime - lastTimeout) > timeout )? return true : return false;
+    //unsigned long int diff = currentTime - lastTimeout;
+    bool ret = (currentTime - lastTimeout) > timeout ? true : false;
+    return ret;
 }
-bool SaIoTSensor::exceededResolution(resolution){
+bool SaIoTSensor::exceededResolution( long int resolution){
  //pensar em como mensurar
+ return false;
 }
 
 int SaIoTSensor::sendValue(void){
     lastTimeout = millis();
     //enviar
+    Serial.println("ENVIOU");
+    return 0;
+}
+
+void SaIoTSensor::setTimeout(long int _timeout){
+ timeout = _timeout;
+}
+void SaIoTSensor::setDeadBand(long int _deadband){
+ deadband = _deadband;
 }

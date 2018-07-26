@@ -20,7 +20,7 @@ private:
   //Pensar em atributos que vão fora do json de configuração! 
   
   /* timeout 3 segundos = 3 * 1000 milissegundos */
-  unsigned long int deadband = NULL_VALUE,
+  long int deadband = NULL_VALUE,
                     timeout = NULL_VALUE,
                     lastTimeout = 0,
                     lastResolution = 0,
@@ -48,18 +48,21 @@ public:
   String getType(void);
   String getTag(void);
   String getJsonConfig(void);
+  double getValue(void);
 
   void setJsonConfig(String _jConf);
   void setValue(double _value);
-  double getValue(void);
+  void setTimeout(long int _timeout);
+  void setDeadBand(long int _deadband);
 
   /****************************************************************
    * Sensor Reading Functions: Verification and interruptions
   ****************************************************************/
 
   void verify(void);
-  bool exceededDeadband(unsigned long int deadband);
-  bool exceededTimeout(unsigned long int timeout);
+  bool exceededDeadband(long int deadband);
+  bool exceededTimeout(long int timeout);
+  bool exceededResolution(long int resolution);
 
    /****************************************************************
    * Sensor Communication Functions: sending data
