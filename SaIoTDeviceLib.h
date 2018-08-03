@@ -28,7 +28,7 @@ typedef void (*fncpt)(String);
 class SaIoTDeviceLib
 {
 private:
-  SocketIOClient *ws;
+  // SocketIOClient *ws;
   // WiFiClient espClient;
   // PubSubClient *mqttClient;
   // HTTPClient *http;
@@ -74,7 +74,7 @@ public:
 
  /* void addController(SaIoTController *newController);
   void addController(String _key, String _type);
-  void addController(String _key, String _type, String _tag, String _description, double _min, double _step, double _max);*/  
+  void addController(String _key, String _type, String _tag, String _description, double _min, double _step, double _max);*/
   // String getSensors(void);
 
   // void setProtocol(protocol _protocol);
