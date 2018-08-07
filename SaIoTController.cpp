@@ -11,7 +11,7 @@ SaIoTController::SaIoTController(String _jsonConfig){
 
 SaIoTController::SaIoTController(String _key, String _tClass) //esse método é necessário?
 {
-  jConf = ("{\"key\":\"" + _key + "\",\"class\":\"" + _tClass + "\"}");
+  jConf += ("{\"key\":\"" + _key + "\",\"class\":\"" + _tClass + "\"}");
   key = _key;
 }
 

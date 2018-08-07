@@ -11,9 +11,9 @@
 #include "SaIoTSensor.h"
 #include "SaIoTController.h"
 
-#ifndef qtdSensors
+/*#ifndef qtdSensors
 #define qtdSensors 1
-#endif
+#endif*/
 /*#ifndef qtdControllers
 #define qtdControllers 1
 #endif*/
@@ -24,49 +24,53 @@ enum protocol
   MQTT,
   HTTP
 };
-typedef void (*fncpt)(String);
+//typedef void (*fncpt)(String);
+
 class SaIoTDeviceLib
 {
 private:
-  SocketIOClient *ws;
+  //SocketIOClient *ws;
   // WiFiClient espClient;
   // PubSubClient *mqttClient;
   // HTTPClient *http;
 
+  /*
+    Tudo que for do device deve ser guardado na EEPROM futuramente, pra caso de atualização via OTA 
+  */
   String name;
   String serial;
-  String host;
-  String post;
-  String erro;
-  int port = 80;
+  String token;
+  String email; 
+
+  // String host;
+  // String post;
+  // String erro;
+  // int port = 80;
+  
   protocol _protocol = WS; //olhar dps
 
-  unsigned int sensorIndex = 0;
+  //unsigned int sensorIndex = 0;
   //unsigned int controllerIndex = 0;
-  SaIoTSensor *sensors[qtdSensors];
+  //SaIoTSensor *sensors[qtdSensors];
   //SaIoTController *controllers[qtdControllers];
 
 public:
   /* criar um construtor  e passar a start para o produto talvez*/
   //Editar após discussão de conexão
-  SaIoTDeviceLib(String _name, String _serial, String _host, String _post, String _erro, int _port);
+  SaIoTDeviceLib(String _name, String _serial, String _email);
   SaIoTDeviceLib();
 
-  void start();
-  void start(String serial);
-  void start(String serial, protocol _protocol, String _host, int _port);
+  void setToken(String _token);
 
-  void setName(String _name);
-  String getName(void);
+  String getName();
+  String getSerial();
+  String getToken();
+  String getEmail();
+  String getProtocol();
 
-  void setSerial(String _serial);
-  String getSerial(void);
+  String makeJconf();
 
-  void setHost(String _host);
-  String getHost(void);
 
-  void setPort(int _port);
-  int getPort(void);
 
   /*void addSensor(SaIoTSensor *newSensor);
   void addSensor(String _key, int _deadbandMin, int _deadbandMax, int _timeout, int _resolution, bool _isAcumm, String _label, String _unit);
