@@ -29,7 +29,11 @@ enum protocol
 class SaIoTDeviceLib
 {
 private:
+<<<<<<< HEAD
   //SocketIOClient *ws;
+=======
+  // SocketIOClient *ws;
+>>>>>>> 1aaf18c9257bb7f995922958e22d06ed2bf345fd
   // WiFiClient espClient;
   // PubSubClient *mqttClient;
   // HTTPClient *http;
@@ -78,7 +82,7 @@ public:
 
  /* void addController(SaIoTController *newController);
   void addController(String _key, String _type);
-  void addController(String _key, String _type, String _tag, String _description, double _min, double _step, double _max);*/  
+  void addController(String _key, String _type, String _tag, String _description, double _min, double _step, double _max);*/
   // String getSensors(void);
 
   // void setProtocol(protocol _protocol);
