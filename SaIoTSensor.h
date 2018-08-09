@@ -22,10 +22,11 @@ private:
   /* timeout 3 segundos = 3 * 1000 milissegundos */
   long int deadband = NULL_VALUE,
                     timeout = NULL_VALUE,
-                    lastTimeout = 0,
                     lastResolution = 0,
                     resolution = NULL_VALUE;
   double value;
+
+  unsigned long lastTimeout = 0; 
   
   //bool isAcumm = true , isSync = true, isDigital=true;
   // typedef void (*verifyfunct)(void);
@@ -60,9 +61,9 @@ public:
   ****************************************************************/
 
   void verify(void);
-  bool exceededDeadband(long int deadband);
-  bool exceededTimeout(long int timeout);
-  bool exceededResolution(long int resolution);
+  bool exceededDeadband(void);
+  bool exceededTimeout(void);
+  bool exceededResolution(void);
 
    /****************************************************************
    * Sensor Communication Functions: sending data

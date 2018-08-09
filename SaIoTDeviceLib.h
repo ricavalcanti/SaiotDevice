@@ -2,7 +2,7 @@
 #define SaIoTDeviceLib_h
 //ESPERANDO ATUALIZAÇÃO DOS SENSOR POR PATRICIO
 #include <Arduino.h>
-#include <WiFiManager.h>
+//#include <WiFiManager.h>
 //#include <SocketIOClient.h>
 //#include <ArduinoJson.h>
 //#include <ESP8266HTTPClient.h>
@@ -11,12 +11,10 @@
 #include "SaIoTSensor.h"
 #include "SaIoTController.h"
 
-/*#ifndef qtdSensors
-#define qtdSensors 1
-#endif*/
-/*#ifndef qtdControllers
-#define qtdControllers 1
-#endif*/
+
+#define maxSensors 5
+#define maxControllers 1
+
 
 enum protocol
 {
@@ -29,11 +27,6 @@ enum protocol
 class SaIoTDeviceLib
 {
 private:
-<<<<<<< HEAD
-  //SocketIOClient *ws;
-=======
-  // SocketIOClient *ws;
->>>>>>> 1aaf18c9257bb7f995922958e22d06ed2bf345fd
   // WiFiClient espClient;
   // PubSubClient *mqttClient;
   // HTTPClient *http;
@@ -53,18 +46,21 @@ private:
   
   protocol _protocol = WS; //olhar dps
 
-  //unsigned int sensorIndex = 0;
-  //unsigned int controllerIndex = 0;
-  //SaIoTSensor *sensors[qtdSensors];
-  //SaIoTController *controllers[qtdControllers];
+  unsigned int qtdSensors = 0;
+  unsigned int qtdControllers = 0;
+  SaIoTSensor *sensors[maxSensors];
+  SaIoTController *controllers[maxControllers];
 
 public:
   /* criar um construtor  e passar a start para o produto talvez*/
   //Editar após discussão de conexão
   SaIoTDeviceLib(String _name, String _serial, String _email);
+  SaIoTDeviceLib(String _name, String _serial);
   SaIoTDeviceLib();
 
   void setToken(String _token);
+  void setEmail(String _email);
+  void handle(void);
 
   String getName();
   String getSerial();
@@ -72,16 +68,21 @@ public:
   String getEmail();
   String getProtocol();
 
+  int getNSensors();
+  int getNControllers();
+
   String makeJconf();
 
+  String getObj(void);
 
 
-  /*void addSensor(SaIoTSensor *newSensor);
-  void addSensor(String _key, int _deadbandMin, int _deadbandMax, int _timeout, int _resolution, bool _isAcumm, String _label, String _unit);
+
+  void addSensor(SaIoTSensor &newSensor);
+  /*void addSensor(String _key, int _deadbandMin, int _deadbandMax, int _timeout, int _resolution, bool _isAcumm, String _label, String _unit);
   void addSensor(String _key, String _unit);*/
 
- /* void addController(SaIoTController *newController);
-  void addController(String _key, String _type);
+  void addController(SaIoTController &newController);
+  /*void addController(String _key, String _type);
   void addController(String _key, String _type, String _tag, String _description, double _min, double _step, double _max);*/
   // String getSensors(void);
 

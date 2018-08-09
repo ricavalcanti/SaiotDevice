@@ -64,39 +64,43 @@ void SaIoTSensor::setValue(double _value){
 }
 
 void SaIoTSensor::verify(void){
+    
     if(deadband != NULL_VALUE){
-        if(exceededDeadband(deadband)){
-            sendValue();
+        if(exceededDeadband()){
+            sendValue();//usar aqui o ponteiro pra função
         }
     }
     if(timeout != NULL_VALUE){
-        if(exceededTimeout(timeout)){
+        if(exceededTimeout()){
             sendValue();
         }
     }
     if(resolution != NULL_VALUE){
-        if(exceededResolution(resolution)){
+        if(exceededResolution()){
             sendValue();
         }
     }
 }
 
-bool SaIoTSensor::exceededDeadband(long int deadband){
+bool SaIoTSensor::exceededDeadband(){
     bool ret = value>deadband ? true : false;
     return ret;
 }
-bool SaIoTSensor::exceededTimeout(long int timeout){
+bool SaIoTSensor::exceededTimeout(){
     unsigned long int currentTime = millis();
-    //unsigned long int diff = currentTime - lastTimeout;
+    if(lastTimeout == 0){
+        lastTimeout = currentTime; //equivalente ao start
+        return false;
+    }
     bool ret = (currentTime - lastTimeout) > timeout ? true : false;
     return ret;
 }
-bool SaIoTSensor::exceededResolution( long int resolution){
+bool SaIoTSensor::exceededResolution(){
  //pensar em como mensurar
  return false;
 }
 
-int SaIoTSensor::sendValue(void){
+int SaIoTSensor::sendValue(void){ //essa função n existirá, o usuário que vai definir o que acontece. Então chamaria o ponteiro pra função 
     lastTimeout = millis();
     //enviar
     Serial.println("ENVIOU");
