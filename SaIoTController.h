@@ -10,12 +10,7 @@ class SaIoTController
 private:
   String jConf;
   String key;
-
-  //double min, max, step;
-  func_pointer function;
-  //void (*func_pointer)(int);
-
-
+  //void (*func_pointer)(int); //ponteiro pra função
 public:
   SaIoTController();
   SaIoTController(String _jsonConfig);

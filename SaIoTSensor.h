@@ -4,22 +4,15 @@
 #include <Arduino.h>
 
 #define NULL_VALUE -1
-
+//FALTA OUTROS MÉTODOS PRO TIMEOUT: EX O TIMEOUT DE SEGUNDOS OU DE MICROSEGUNDOS (?)
 class SaIoTSensor
 {
 private:
-  /*String key;
-  String tag;
-  String unit;
-  String type;
-  boolean accumulate;*/
 
   String jConf;
   String key;
   String serial;
   //Pensar em atributos que vão fora do json de configuração! 
-  
-  /* timeout 3 segundos = 3 * 1000 milissegundos */
   long int deadband = NULL_VALUE,
                     timeout = NULL_VALUE,
                     lastResolution = 0,
@@ -28,8 +21,8 @@ private:
 
   unsigned long lastTimeout = 0; 
   
-  //bool isAcumm = true , isSync = true, isDigital=true;
-  // typedef void (*verifyfunct)(void);
+  //bool isAcumm = true , isSync = true, isDigital=true; PRECISARIA DISSO?
+  // typedef void (*verifyfunct)(void); PONTEIRO P FUNÇÃO DE RETORNO
 public:
   SaIoTSensor();
   SaIoTSensor(String _jsonConfig);
@@ -42,7 +35,7 @@ public:
 
   String getKey(void); //1
   String getSerial(void); //2
-  //1 e 2: campos necessários p enviar dados ao server 
+  //1 e 2: campos necessários sempre que for enviar dados ao server 
 
   String getByField(String _field); 
   String getUnit(void);
@@ -70,5 +63,4 @@ public:
   ****************************************************************/
   int sendValue(void);
 };
-
 #endif
