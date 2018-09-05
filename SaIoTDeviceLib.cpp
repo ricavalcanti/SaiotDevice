@@ -15,18 +15,43 @@ SaIoTDeviceLib::SaIoTDeviceLib(String _name, String _serial){
 SaIoTDeviceLib::SaIoTDeviceLib(){
 };
 
+void SaIoTDeviceLib::preSetCom(WiFiClient& espClient, fptr _function){
+  objCom.setClientw(espClient);
+  objCom.setCallbackz(_function);
+}
+void SaIoTDeviceLib::startDefault(String s){
+  startCom(HOST, PORT, hostHttp, POSTDISPOSITIVO, s);
+}
+void SaIoTDeviceLib::startCom(const char* hostSend, uint16_t portSend, const char* hostTok, const char* hostCd, String pUser){
+  objCom.setServerPort(hostSend, portSend);
+  //objCom.setCallbackz(SaIoTDeviceLib::callback);
+  //objCom.getObj().setCallback(SaIoTDeviceLib::callback);
+  WiFi.begin("Tech_D0010220", "santacruz1701");
+  //WiFi.begin("LII","wifiLI2Rn");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(100);
+    Serial.print(".");
+  }
+  Serial.print("Conectado na Rede " + WiFi.SSID());
+  //wifi.autoConnect(this->serial);
+  this->setToken(objCom.getToken(hostTok, email, pUser, serial));
+  objCom.registerDevice(serial, email, token, this->makeJconf(), hostCd);
+}
+
 void SaIoTDeviceLib::setToken(String _token){
   token = _token;
 }
 void SaIoTDeviceLib::setEmail(String _email){
   email = _email;
 }
-void SaIoTDeviceLib::handle(void){
+/*void SaIoTDeviceLib::handle(void){
   for(int i=0;i<qtdSensors;i++){
     sensors[i]->verify();
   }
+}*/
+boolean SaIoTDeviceLib::loopLoko(){
+  return objCom.handleCom();
 }
-
 String SaIoTDeviceLib::getName(void){
   return name;
 }

@@ -2,7 +2,6 @@
 #define SaIoTController_h
 
 #include <Arduino.h>
-#include<ArduinoJson.h>
 
 typedef void (*func_pointer)(String); //necessario verif
 class SaIoTController
@@ -10,6 +9,7 @@ class SaIoTController
 private:
   String jConf;
   String key;
+  func_pointer actFoo;
   //void (*func_pointer)(int); //ponteiro pra função
 public:
   SaIoTController();

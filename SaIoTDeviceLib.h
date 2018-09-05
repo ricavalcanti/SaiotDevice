@@ -1,19 +1,23 @@
 #ifndef SaIoTDeviceLib_h
 #define SaIoTDeviceLib_h
 #include <Arduino.h>
+#include <ESP8266WiFi.h>
 #include "SaIoTSensor.h"
 #include "SaIoTController.h"
+#include "SaIoTCom.h"
 
 #define maxSensors 5
 #define maxControllers 1
 //FALTA PENSAR NOS CONTROLADORES, NA HORA DO SUBSCRIBE
-enum protocol
-{
-  WS,
-  MQTT,
-  HTTP
-};
+
+//Params conexão SaIoT server v1.7
+#define HOST "api.saiot.ect.ufrn.br" 
+#define hostHttp "http://api.saiot.ect.ufrn.br/v1/device/auth/login" 
+#define PORT  8000 //MQTT 
+#define POSTDISPOSITIVO "/manager/post/device/" 
+
 //typedef void (*fncpt)(String); //ponteiro pra função
+typedef void (*fptr)(char* topic, byte* payload, unsigned int length);
 
 class SaIoTDeviceLib
 {
@@ -26,13 +30,13 @@ private:
   String serial;
   String token;
   String email; 
-  
-  protocol _protocol = WS; //olhar dps
 
   unsigned int qtdSensors = 0;
   unsigned int qtdControllers = 0;
   SaIoTSensor *sensors[maxSensors];
   SaIoTController *controllers[maxControllers];
+  SaIoTCom objCom;
+  //WiFiManager wifi;
 public:
   /* criar um construtor  e passar a start para o produto talvez*/
   //Editar após discussão de conexão
@@ -40,9 +44,14 @@ public:
   SaIoTDeviceLib(String _name, String _serial);
   SaIoTDeviceLib();
 
+  void preSetCom(WiFiClient&, fptr _function);
+  void startDefault(String s);
+  void startCom(const char* hostSend, uint16_t portSend, const char* hostTok, const char* hostCd, String pUser);//poderia ser setParams e só depois o Start
   void setToken(String _token);
   void setEmail(String _email);
   void handle(void);
+  boolean loopLoko();
+  
 
   String getName();
   String getSerial();
