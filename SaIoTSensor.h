@@ -4,6 +4,8 @@
 #include <Arduino.h>
 
 #define NULL_VALUE -1
+typedef void (*verifyfunct)(void); //PONTEIRO P FUNÇÃO DE RETORNO
+
 //FALTA OUTROS MÉTODOS PRO TIMEOUT: EX O TIMEOUT DE SEGUNDOS OU DE MICROSEGUNDOS (?)
 class SaIoTSensor
 {
@@ -14,15 +16,13 @@ private:
   String serial;
   //Pensar em atributos que vão fora do json de configuração! 
   long int deadband = NULL_VALUE,
-                    timeout = NULL_VALUE,
-                    lastResolution = 0,
-                    resolution = NULL_VALUE;
+            timeout = NULL_VALUE,
   double value;
 
-  unsigned long lastTimeout = 0; 
-  
-  //bool isAcumm = true , isSync = true, isDigital=true; PRECISARIA DISSO?
-  // typedef void (*verifyfunct)(void); PONTEIRO P FUNÇÃO DE RETORNO
+  unsigned long lastTimeout = 0;
+
+  verifyfunct readValueFunction;
+
 public:
   SaIoTSensor();
   SaIoTSensor(String _jsonConfig);
@@ -52,11 +52,11 @@ public:
   /****************************************************************
    * Sensor Reading Functions: Verification and interruptions
   ****************************************************************/
-
+  void setReadValueFunction(verifyfunct readValue);
+  double getReadValueFunction();
   void verify(void);
   bool exceededDeadband(void);
   bool exceededTimeout(void);
-  bool exceededResolution(void);
 
    /****************************************************************
    * Sensor Communication Functions: sending data

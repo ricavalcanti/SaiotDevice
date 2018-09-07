@@ -52,8 +52,6 @@ String SaIoTSensor::getType(void){
     return getByField("type");
 }
 
-//METODOS SET 
-
 void SaIoTSensor::setJsonConfig(String _jsonConfig){
     jConf = _jsonConfig;
     key = getByField("key");
@@ -67,16 +65,11 @@ void SaIoTSensor::verify(void){
     
     if(deadband != NULL_VALUE){
         if(exceededDeadband()){
-            sendValue();//usar aqui o ponteiro pra função
+            sendValue();
         }
     }
     if(timeout != NULL_VALUE){
         if(exceededTimeout()){
-            sendValue();
-        }
-    }
-    if(resolution != NULL_VALUE){
-        if(exceededResolution()){
             sendValue();
         }
     }
@@ -95,15 +88,12 @@ bool SaIoTSensor::exceededTimeout(){
     bool ret = (currentTime - lastTimeout) > timeout ? true : false;
     return ret;
 }
-bool SaIoTSensor::exceededResolution(){
- //pensar em como mensurar
- return false;
-}
 
-int SaIoTSensor::sendValue(void){ //essa função n existirá, o usuário que vai definir o que acontece. Então chamaria o ponteiro pra função 
+int SaIoTSensor::sendValue(void){ 
     lastTimeout = millis();
-    //enviar
-    Serial.println("ENVIOU");
+
+    double value = getReadValueFunction();
+    Serial.println("VALOR LIDO: " + value);
     return 0;
 }
 
@@ -112,4 +102,12 @@ void SaIoTSensor::setTimeout(long int _timeout){
 }
 void SaIoTSensor::setDeadBand(long int _deadband){
  deadband = _deadband;
+}
+
+void SaIoTSensor::setReadValueFunction(verifyfunct readValue){
+    readValueFunction = readValue;
+}
+
+double SaIoTSensor::getReadValueFunction(){ //[Dani] Dá um jeito de colocar uma função default pra caso o usuário queira sacanear
+    return readValueFunction();
 }
