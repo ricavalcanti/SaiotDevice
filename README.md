@@ -19,6 +19,7 @@ WiFiClient();
 SaIoTDeviceLib(String,String,String);
 ```
 2. Ainda nesse mesmo escopo, deve-se inicializar os componentes do Device a ser criado (todos os seus controladores e sensores, utilizando as classes **SaIoTController** e **SaIoTSensor**, respectivamente). 
+	
 	1.Para um controlador deve-se passar como parâmetros, necessáriamente nessa sequência, uma key, o nome do tipo do 		controlador e uma tag; uma forma alternativa é passar todo o seu JSON de configuração. 
 	  ```c++
 	SaIoTController(String, String, String);
