@@ -1,5 +1,5 @@
 # SaIoTDevicelib
-Biblioteca genérica para gerenciamento de dispositivos IoT
+Biblioteca genérica para gerenciamento e comunicação de dispositivos IoT, estruturada pensando no padrão de arquitetura do SaIoT
 
 ## Contém:
 - Gerenciamento de *WiFi* (WiFiManager);
