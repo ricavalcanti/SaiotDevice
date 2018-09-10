@@ -9,14 +9,20 @@ Biblioteca genérica para gerenciamento e comunicação de dispositivos IoT, est
 ## Como usar:
 ### Incluindo  no projeto
 1. Para usar basta, primeiramente, fazer o *download* do código, extrair e colar na pasta de bibliotecas do seu projeto;
-2. Deve-se também, fazer o *download* das seguintes bibliotecas (para comunicação): [WiFiManager](https://github.com/tzapu/WiFiManager) e [PubSubClient](https://github.com/knolleary/pubsubclient);
+2. Deve-se também, fazer o *download* das seguintes bibliotecas (para comunicação): [WiFiManager](https://github.com/tzapu/WiFiManager) e [PubSubClient](https://github.com/knolleary/pubsubclient).
 
 ### Utilização
-1. No escopo de varáveis globais, deve-se incluir a biblioteca SaIoTDeviceLib, inicializar um objeto  tipo **WiFiClient**, inicializar um objeto do tipo **SaIoTDeviceLib** com seus respectivos atributos (você deverá passar o nome do Device, a Serial e o email, cadastrado no SaIoT, de quem irá cadastrar o dispositivo em questão, respectivamente). 
+1. No escopo de varáveis globais, deve-se incluir a biblioteca SaIoTDeviceLib, inicializar um objeto  tipo **WiFiClient**, inicializar um objeto do tipo **SaIoTDeviceLib** com seus respectivos atributos (você deverá passar o nome do Device, a Serial e o email, utilizado no SaIoT, de quem irá cadastrar o dispositivo em questão, respectivamente);
   ```c++
  #include  <SaIoTDeviceLib.h>
-SaIoTDeviceLib lampadinha(String,String,String);
+WiFiClient();
+SaIoTDeviceLib(String,String,String);
 ```
+2. Ainda nesse mesmo escopo, deve-se inicializar os componentes do Device a ser criado (todos os seus controladores e sensores, utilizando as classes **SaIoTController** e **SaIoTSensor**, respectivamente); 
+  ```c++
+SaIoTController("ON","onoff","on/off");
+```
+
 ### Configurando
 Uma vez incluída, a biblioteca facilitará várias etapas do seu projeto. Aproveitando o objeto exemplo criado no item anterior temos os seguintes comandos para:
 
