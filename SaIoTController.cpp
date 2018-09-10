@@ -67,8 +67,8 @@ String SaIoTController::getJsonConfig(void){
   return jConf;
 }
 
-void SaIoTController::setAction(func_pointer _function){
+/*void SaIoTController::setAction(func_pointer _function){
   actFoo = _function;
-}
+}*/
 
 

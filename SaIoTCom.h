@@ -18,15 +18,9 @@ class SaIoTCom
     String getToken(String hostHttp,String user, String password, String serial);
     void setServerPort(const char * server, uint16_t port);
     void setCallbackz(functionPointer f);
-    void registerDevice(String serial,String user,String token,String jsonConf,const char* hostReg);
+    void registerDevice(String serial,String user,String token,String jsonConf,const char* hostReg,String keys[], int nKeys);
     void setClientw(WiFiClient& espClient);
-
     boolean handleCom();
-    //PubSubClient getObj(void);
-    //void subscribeController(String topic);
-    //void doHandle();
-
-
 };
 
 #endif

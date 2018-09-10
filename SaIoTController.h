@@ -9,7 +9,7 @@ class SaIoTController
 private:
   String jConf;
   String key;
-  func_pointer actFoo;
+  //func_pointer actFoo;
   //void (*func_pointer)(int); //ponteiro pra função
 public:
   SaIoTController();
@@ -26,6 +26,6 @@ public:
   void setJsonConfig(String _jConfExt); 
   String getJsonConfig(void); //pega todo o json de configuração pra ser enviado ao back
 
-  void setAction(func_pointer _function);
+  //void setAction(func_pointer _function);
 };
 #endif

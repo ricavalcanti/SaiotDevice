@@ -2,14 +2,13 @@
 #define SaIoTDeviceLib_h
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
+#include <WiFiManager.h>
 #include "SaIoTSensor.h"
 #include "SaIoTController.h"
 #include "SaIoTCom.h"
 
-#define maxSensors 5
-#define maxControllers 1
-//FALTA PENSAR NOS CONTROLADORES, NA HORA DO SUBSCRIBE
-
+#define maxSensors 1
+#define maxControllers 5
 //Params conexão SaIoT server v1.7
 #define HOST "api.saiot.ect.ufrn.br" 
 #define hostHttp "http://api.saiot.ect.ufrn.br/v1/device/auth/login" 
@@ -36,12 +35,11 @@ private:
   SaIoTSensor *sensors[maxSensors];
   SaIoTController *controllers[maxControllers];
   SaIoTCom objCom;
-  //WiFiManager wifi;
+  WiFiManager wifi;
 public:
-  /* criar um construtor  e passar a start para o produto talvez*/
   //Editar após discussão de conexão
   SaIoTDeviceLib(String _name, String _serial, String _email);
-  SaIoTDeviceLib(String _name, String _serial);
+  //SaIoTDeviceLib(String _name, String _serial);
   SaIoTDeviceLib();
 
   void preSetCom(WiFiClient&, fptr _function);
@@ -57,7 +55,7 @@ public:
   String getSerial();
   String getToken();
   String getEmail();
-  String getProtocol();
+  //String getProtocol();
 
   int getNSensors();
   int getNControllers();

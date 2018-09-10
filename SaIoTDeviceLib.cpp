@@ -7,10 +7,10 @@ SaIoTDeviceLib::SaIoTDeviceLib(String _name, String _serial, String _email)
   email = _email;
 
 };
-SaIoTDeviceLib::SaIoTDeviceLib(String _name, String _serial){
+/*SaIoTDeviceLib::SaIoTDeviceLib(String _name, String _serial){
   name = _name;
   serial = _serial;
-}
+}*/
 
 SaIoTDeviceLib::SaIoTDeviceLib(){
 };
@@ -24,18 +24,13 @@ void SaIoTDeviceLib::startDefault(String s){
 }
 void SaIoTDeviceLib::startCom(const char* hostSend, uint16_t portSend, const char* hostTok, const char* hostCd, String pUser){
   objCom.setServerPort(hostSend, portSend);
-  //objCom.setCallbackz(SaIoTDeviceLib::callback);
-  //objCom.getObj().setCallback(SaIoTDeviceLib::callback);
-  WiFi.begin("Tech_D0010220", "santacruz1701");
-  //WiFi.begin("LII","wifiLI2Rn");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(100);
-    Serial.print(".");
-  }
-  Serial.print("Conectado na Rede " + WiFi.SSID());
-  //wifi.autoConnect(this->serial);
+  wifi.autoConnect(serial.c_str());
   this->setToken(objCom.getToken(hostTok, email, pUser, serial));
-  objCom.registerDevice(serial, email, token, this->makeJconf(), hostCd);
+  String keys[qtdControllers];
+  for(unsigned int i=0; i<qtdControllers; i++){
+    keys[i]+=controllers[i]->getKey();
+  }
+  objCom.registerDevice(serial, email, token, this->makeJconf(), hostCd, keys, qtdControllers);
 }
 
 void SaIoTDeviceLib::setToken(String _token){
@@ -69,7 +64,7 @@ String SaIoTDeviceLib::makeJconf(void){
   JSON += "{\"token\":\""+token+"\",\"data\":{\"name\":\""+name +"\",\"serial\":\""+ serial+"\"";
   if(qtdControllers>0){
     JSON += ",\"controllers\":[";
-    for(int i=0; i<qtdControllers; i++){
+    for(unsigned int i=0; i<qtdControllers; i++){
       JSON += controllers[i]->getJsonConfig();
       if(i==qtdControllers-1){
         JSON += "]";
@@ -80,7 +75,7 @@ String SaIoTDeviceLib::makeJconf(void){
   }  
   if(qtdSensors>0){
     JSON += ",\"sensors\":[";
-    for(int i=0; i<qtdSensors; i++){
+    for(unsigned int i=0; i<qtdSensors; i++){
       JSON += sensors[i]->getJsonConfig();
       if(i==qtdSensors-1){
         JSON += "]";
@@ -101,10 +96,10 @@ int SaIoTDeviceLib::getNControllers(void){
   return qtdControllers;
 }
 
-void SaIoTDeviceLib::addSensor(SaIoTSensor &newSensor)
+/*void SaIoTDeviceLib::addSensor(SaIoTSensor &newSensor)
 {
   sensors[qtdSensors++] = &newSensor;
-}
+}*/
 /*void SaIoTDeviceLib::addSensor(String _key, String _unit)
 {
   sensors[qtdSensors++] = new SaIoTSensor(_key, _unit);
