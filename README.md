@@ -9,7 +9,8 @@ Biblioteca genérica para gerenciamento e comunicação de dispositivos IoT, est
 ## Como usar:
 ### Incluindo  no projeto
 1. Para usar basta, primeiramente, fazer o *download* do código, extrair e colar na pasta de bibliotecas do seu projeto;
-2. Em seguida, deve-se incluí-la em seu projeto e criar um objeto conforme exemplificado abaixo;
+2. Deve-se também, fazer o *download* das seguintes bibliotecas (para comunicação): [WiFiManager](https://github.com/tzapu/WiFiManager), [PubSubClient](https://github.com/knolleary/pubsubclient)
+3. Em seguida, deve-se incluí-la em seu projeto e criar um objeto conforme exemplificado abaixo;
   ```c++
  #include  <SaIoTDeviceLib.h>
 SaIoTDeviceLib myDevice;
