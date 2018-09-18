@@ -1,5 +1,5 @@
-#ifndef SaIoTDeviceLib_h
-#define SaIoTDeviceLib_h
+#ifndef SaIoTDevice_h
+#define SaIoTDevice_h
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <WiFiManager.h>
@@ -10,25 +10,25 @@
 #define maxSensors 1
 #define maxControllers 5
 //Params conexão SaIoT server v1.7
-#define HOST "api.saiot.ect.ufrn.br" 
-#define hostHttp "http://api.saiot.ect.ufrn.br/v1/device/auth/login" 
-#define PORT  8000 //MQTT 
-#define POSTDISPOSITIVO "/manager/post/device/" 
+#define HOST "api.saiot.ect.ufrn.br"
+#define hostHttp "http://api.saiot.ect.ufrn.br/v1/device/auth/login"
+#define PORT  8000 //MQTT
+#define POSTDISPOSITIVO "/manager/post/device/"
 
 //typedef void (*fncpt)(String); //ponteiro pra função
 typedef void (*fptr)(char* topic, byte* payload, unsigned int length);
 
-class SaIoTDeviceLib
+class SaIoTDevice
 {
 private:
 
   /*
-    Tudo que for do device deve ser guardado na EEPROM futuramente, pra caso de atualização via OTA 
+    Tudo que for do device deve ser guardado na EEPROM futuramente, pra caso de atualização via OTA
   */
   String name;
   String serial;
   String token;
-  String email; 
+  String email;
 
   unsigned int qtdSensors = 0;
   unsigned int qtdControllers = 0;
@@ -38,9 +38,9 @@ private:
   WiFiManager wifi;
 public:
   //Editar após discussão de conexão
-  SaIoTDeviceLib(String _name, String _serial, String _email);
-  //SaIoTDeviceLib(String _name, String _serial);
-  SaIoTDeviceLib();
+  SaIoTDevice(String _name, String _serial, String _email);
+  //SaIoTDevice(String _name, String _serial);
+  SaIoTDevice();
 
   void preSetCom(WiFiClient&, fptr _function);
   void startDefault(String s);
@@ -49,7 +49,7 @@ public:
   void setEmail(String _email);
   void handle(void);
   boolean loopLoko();
-  
+
 
   String getName();
   String getSerial();
