@@ -48,7 +48,7 @@ public:
   void setToken(String _token);
   void setEmail(String _email);
   void handle(void);
-  boolean loopLoko();
+  boolean handleLoop();
   
 
   String getName();

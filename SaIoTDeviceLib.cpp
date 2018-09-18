@@ -44,7 +44,7 @@ void SaIoTDeviceLib::setEmail(String _email){
     sensors[i]->verify();
   }
 }*/
-boolean SaIoTDeviceLib::loopLoko(){
+boolean SaIoTDeviceLib::handleLoop(){
   return objCom.handleCom();
 }
 String SaIoTDeviceLib::getName(void){
