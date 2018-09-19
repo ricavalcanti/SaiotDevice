@@ -21,23 +21,31 @@ String SaIoTSensor::getSerial(void){
 double SaIoTSensor::getValue(void){
     return value;
 }
+bool SaIoTSensor::getReport(){
+    if(reportMe == 1){
+        reportMe = 0;
+        return 1;
+    }else{
+        return reportMe;
+    }  
+}
 String SaIoTSensor::getByField(String _field){
     int idxField = jConf.indexOf(_field); //field
 	int init, end;
 	
 	if(idxField != -1){
-		init = jConf.indexOf(":", idxField) + 1; 
-    if(jConf[init] == '\"'){ //nesse caso o dado sera string e precisamos que o index aponte para o inicio do dado
-      init = init+1;
-      end = jConf.indexOf("\"", init);
-    }else{//nesse caso o dado sera um valor numerico
-      end = jConf.indexOf(",", init);
-      if(end == -1){ //nesse caso o dado se encontra no final do JSON
-			    end = jConf.indexOf("}", init);
+	    init = jConf.indexOf(":", idxField) + 1; 
+    if(jConf[init] == '\"'){
+        init = init+1;
+        end = jConf.indexOf("\"", init);
+    }else{
+        end = jConf.indexOf(",", init);
+      if(end == -1){
+		end = jConf.indexOf("}", init);
         }
 	}
-    return jConf.substring(init,end); 
-    }else{ //caso o campo n seja encontrado
+        return jConf.substring(init,end); 
+    }else{
 		return "-1";
 	}
 }
@@ -51,6 +59,9 @@ String SaIoTSensor::getTag(void){
 String SaIoTSensor::getType(void){
     return getByField("type");
 }
+String SaIoTSensor::getLastDate(void){
+    return lastDate;
+}
 
 //METODOS SET 
 
@@ -59,11 +70,25 @@ void SaIoTSensor::setJsonConfig(String _jsonConfig){
     key = getByField("key");
     serial = getByField("serial");
 }
-void SaIoTSensor::setValue(double _value){
+
+void SaIoTSensor::sendData(double _value){
+    //reportMe = 1;
+    return this->sendData(_value,SaIoTCom::getDateNow());
+
+}
+void SaIoTSensor::sendData(double _value, String dateTime){
+    reportMe = 1;
     value = _value;
+    lastDate = dateTime;
 }
 
-void SaIoTSensor::verify(void){
+//FUNCIONALIDADES FUTURAS
+
+/*void SaIoTSensor::setValue(double _value){
+    value = _value;
+}*/
+
+/*void SaIoTSensor::verify(void){
     
     if(deadband != NULL_VALUE){
         if(exceededDeadband()){
@@ -99,8 +124,8 @@ bool SaIoTSensor::exceededResolution(){
  //pensar em como mensurar
  return false;
 }
-
-int SaIoTSensor::sendValue(void){ //essa função n existirá, o usuário que vai definir o que acontece. Então chamaria o ponteiro pra função 
+*/
+/*int SaIoTSensor::sendValue(void){ //essa função n existirá, o usuário que vai definir o que acontece. Então chamaria o ponteiro pra função 
     lastTimeout = millis();
     //enviar
     Serial.println("ENVIOU");
@@ -112,4 +137,4 @@ void SaIoTSensor::setTimeout(long int _timeout){
 }
 void SaIoTSensor::setDeadBand(long int _deadband){
  deadband = _deadband;
-}
+}*/

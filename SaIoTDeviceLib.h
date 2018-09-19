@@ -7,7 +7,7 @@
 #include "SaIoTController.h"
 #include "SaIoTCom.h"
 
-#define maxSensors 1
+#define maxSensors 5
 #define maxControllers 5
 //Params conexão SaIoT server v1.7
 #define HOST "api.saiot.ect.ufrn.br" 
@@ -30,37 +30,30 @@ private:
   String token;
   String email; 
 
-  unsigned int qtdSensors = 0;
-  unsigned int qtdControllers = 0;
+  int qtdSensors = 0;
+  int qtdControllers = 0;
   SaIoTSensor *sensors[maxSensors];
   SaIoTController *controllers[maxControllers];
   SaIoTCom objCom;
   WiFiManager wifi;
 public:
-  //Editar após discussão de conexão
-  SaIoTDeviceLib(String _name, String _serial, String _email);
-  //SaIoTDeviceLib(String _name, String _serial);
   SaIoTDeviceLib();
+  SaIoTDeviceLib(String _name, String _serial, String _email);
 
   void preSetCom(WiFiClient&, fptr _function);
   void startDefault(String s);
   void startCom(const char* hostSend, uint16_t portSend, const char* hostTok, const char* hostCd, String pUser);//poderia ser setParams e só depois o Start
   void setToken(String _token);
   void setEmail(String _email);
-  void handle(void);
   boolean handleLoop();
   
-
   String getName();
   String getSerial();
   String getToken();
   String getEmail();
-  //String getProtocol();
-
+  String getJconf();
   int getNSensors();
   int getNControllers();
-
-  String makeJconf();
 
   void addSensor(SaIoTSensor &newSensor);
   /*void addSensor(String _key, int _deadbandMin, int _deadbandMax, int _timeout, int _resolution, bool _isAcumm, String _label, String _unit);
