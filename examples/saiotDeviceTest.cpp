@@ -15,8 +15,8 @@
 #define timeToSend 30
 
 WiFiClient espClient;
-SaIoTDeviceLib lampadinha("DeviceTeste","115200zohn","ricardo@email.com");
-SaIoTController onOff("on/off","simpleToogle","onoff");
+SaIoTDeviceLib hidrometro("DeviceTeste","115200zohn","ricardo@email.com");
+SaIoTController valvulaAgua("on/off","simpleToogle","onoff");
 SaIoTSensor medidorAgua("hd01","hidrometro_01","Litros","number");
 String senha = "12345678910";
 void callback(char* topic, byte* payload, unsigned int length);
@@ -24,12 +24,12 @@ void callback(char* topic, byte* payload, unsigned int length);
 unsigned long tDecorrido;
 String getHoraAtual();
 void setup(){
-  lampadinha.addController(onOff);
-  lampadinha.addSensor(medidorAgua);
+  hidrometro.addController(valvulaAgua);
+  hidrometro.addSensor(medidorAgua);
   Serial.begin(115200);
   Serial.println("INICIO");
-  lampadinha.preSetCom(espClient, callback);
-  lampadinha.startDefault(senha);
+  hidrometro.preSetCom(espClient, callback);
+  hidrometro.startDefault(senha);
 
 	tDecorrido = millis();
   
@@ -50,11 +50,10 @@ void callback(char* topic, byte* payload, unsigned int length){
   for (unsigned int i=0;i<length;i++) {
     payloadS += (char)payload[i];
   }
-  if(strcmp(topic,lampadinha.getSerial().c_str()) == 0){
+  if(strcmp(topic,hidrometro.getSerial().c_str()) == 0){
     Serial.println("SerialLog: " + payloadS);
   }
-  if(strcmp(topic,(lampadinha.getSerial()+onOff.getKey()).c_str()) == 0){
+  if(strcmp(topic,(hidrometro.getSerial()+valvulaAgua.getKey()).c_str()) == 0){
     Serial.println("SerialLog: " + payloadS);
-    //
   }
 }
