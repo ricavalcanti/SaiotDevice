@@ -25,7 +25,7 @@ Biblioteca responsável pela comunicação entre dispositivos que usam ESP8266 c
 	```
 2. Deve-se inicializar os componentes do Device a ser criado (todos os seus controladores e sensores, utilizando as classes **SaIoTController** e **SaIoTSensor**):
 	
-- Para um **controlador** deve-se passar como parâmetros **3 Strings**, necessariamente nesta sequência: uma **key** (dado para ser usado como referência daquele controlador), uma **tag** (apenas para identificação), e a **class** do controlador (que indica como ele será renderizado no front); uma forma alternativa é passar todo o seu JSON de configuração. A utilização desse segundo construtor é uma boa alternativa para caso seu controlador tenha mais atributos (consultar documentação do middleware). 
+- Para um **controlador** deve-se passar três parâmetros do tipo **Strings**, necessariamente nesta sequência: uma **key** (dado para ser usado como referência daquele controlador), uma **tag** (apenas para identificação), e a **class** do controlador (que indica como ele será renderizado na interface de usuário). Uma forma alternativa é passar todo o seu JSON de configuração. A utilização desse segundo construtor é uma boa alternativa para caso seu controlador tenha mais atributos. Saiba mais detalhes sobre os [controladores aqui](https://danielaraujorn.github.io/blog/2018/09/18/controladores.html)). 
 	
 	```c++
 	SaIoTController myController(controllerKey, controllerTag, controllerType);
