@@ -51,7 +51,7 @@ public:
   bool getReport();
 
   void setJsonConfig(String _jConf);
-  void sendData(double _value);
+  //void sendData(double _value);
   void sendData(double _value, String dateTime);
   /*void setValue(double _value);
   void setTimeout(long int _timeout);

@@ -71,11 +71,11 @@ void SaIoTSensor::setJsonConfig(String _jsonConfig){
     serial = getByField("serial");
 }
 
-void SaIoTSensor::sendData(double _value){
+/*void SaIoTSensor::sendData(double _value){
     //reportMe = 1;
     return this->sendData(_value,SaIoTCom::getDateNow()); //requisição http pra cada envio??? Gerenciar hora!
 
-}
+}*/
 void SaIoTSensor::sendData(double _value, String dateTime){
     reportMe = 1;
     value = _value;

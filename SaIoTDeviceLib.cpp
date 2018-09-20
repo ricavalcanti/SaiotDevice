@@ -22,6 +22,7 @@ void SaIoTDeviceLib::startDefault(String s){
 void SaIoTDeviceLib::startCom(const char* hostSend, uint16_t portSend, const char* hostTok, const char* hostCd, String pUser){
   objCom.setServerPort(hostSend, portSend);
   //wm
+  WiFiManager wifi;
   wifi.autoConnect(serial.c_str());
   this->setToken(objCom.getToken(hostTok, email, pUser, serial));
   //fim wm

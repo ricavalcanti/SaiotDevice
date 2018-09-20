@@ -12,11 +12,11 @@
 
 #include <Arduino.h>
 #include <SaIoTDeviceLib.h>
-#define timeToSend 30
+#define timeToSend 15
 
 WiFiClient espClient;
-SaIoTDeviceLib hidrometro("DeviceTeste","115200zohn","ricardo@email.com");
-SaIoTController valvulaAgua("on/off","simpleToogle","onoff");
+SaIoTDeviceLib hidrometro("DeviceTeste","1658881hbc","ricardodev@email.com");
+SaIoTController solenoide("on/off","v.Solenoide","onoff");
 SaIoTSensor medidorAgua("hd01","hidrometro_01","Litros","number");
 String senha = "12345678910";
 void callback(char* topic, byte* payload, unsigned int length);
@@ -24,7 +24,7 @@ void callback(char* topic, byte* payload, unsigned int length);
 unsigned long tDecorrido;
 String getHoraAtual();
 void setup(){
-  hidrometro.addController(valvulaAgua);
+  hidrometro.addController(solenoide);
   hidrometro.addSensor(medidorAgua);
   Serial.begin(115200);
   Serial.println("INICIO");
@@ -32,15 +32,14 @@ void setup(){
   hidrometro.startDefault(senha);
 
 	tDecorrido = millis();
-  
 }
 
 void loop(){
 	if( ((millis() - tDecorrido)/1000) >= timeToSend ){
-		medidorAgua.sendData(random(1,30));
+		medidorAgua.sendData(random(1,30),SaIoTCom::getDateNow()); 
 		tDecorrido = millis();
 	}
-	lampadinha.handleLoop();
+	hidrometro.handleLoop();
 }
 
 void callback(char* topic, byte* payload, unsigned int length){
@@ -53,7 +52,8 @@ void callback(char* topic, byte* payload, unsigned int length){
   if(strcmp(topic,hidrometro.getSerial().c_str()) == 0){
     Serial.println("SerialLog: " + payloadS);
   }
-  if(strcmp(topic,(hidrometro.getSerial()+valvulaAgua.getKey()).c_str()) == 0){
+  if(strcmp(topic,(hidrometro.getSerial()+solenoide.getKey()).c_str()) == 0){
     Serial.println("SerialLog: " + payloadS);
+    //
   }
 }
