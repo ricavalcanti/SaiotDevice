@@ -45,7 +45,6 @@ String SaIoTCom::getDateNow(){
 
 boolean SaIoTCom::publishData(String data){
   return mqttClient.publish("/history/post/logs/sensor/",data.c_str());
-  //Serial.println(data.c_str());
 }
 
 void SaIoTCom::setServerPort(const char* server, uint16_t port){
@@ -59,13 +58,11 @@ void SaIoTCom::setClient(WiFiClient& espClient){
   mqttClient.setClient(espClient);
 }
 void SaIoTCom::registerDevice(String serial,String user,String token,String jsonConf,const char* hostReg,String keys[], int nKeys){
-  //#if usedProtocol == MQTT
+
   while (!mqttClient.connected()){
     Serial.println("Tentando se conectar ao Broker MQTT" );
     if (mqttClient.connect(serial.c_str(),user.c_str(),token.c_str())){
       Serial.println("Conectado!");
-      /*Serial.print("JSON CONFIG: ");
-      Serial.println(jsonConf);*/
       if (!mqttClient.subscribe(serial.c_str())){
         Serial.println("Error subscribe in Serial topic");
       }
@@ -74,7 +71,6 @@ void SaIoTCom::registerDevice(String serial,String user,String token,String json
           Serial.println("Error subscribe in keys topics");
         }
       } 
-      //Serial.println(hostReg);
       if(mqttClient.publish(hostReg,jsonConf.c_str())){
           Serial.println("Cadastre o device no SaIoT!");
       }
@@ -84,6 +80,5 @@ void SaIoTCom::registerDevice(String serial,String user,String token,String json
       delay(2000);
     }
   }
-  //#endif
 }
 
