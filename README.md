@@ -75,17 +75,21 @@ Biblioteca responsável pela comunicação entre dispositivos que usam ESP8266 c
   	for (unsigned int i=0;i<length;i++) {
     	payloadS += (char)payload[i];
 		}
+
   	if(strcmp(topic,myDevice.getSerial().c_str()) == 0){
 			//insira aqui o que o device deve fazer ao receber algo nesse tópico
   	}
+
   	if(strcmp(topic,(myDevice.getSerial()+myController.getKey()).c_str()) == 0){
     	//insira aqui o que o device deve fazer ao receber algo nesse tópico
   	}
+		
 	 	if(strcmp(topic,(myDevice.getSerial()+mySensor.getKey()).c_str()) == 0){
     	//insira aqui o que o device deve fazer ao receber algo nesse tópico
   	}
 		//inclua outras condições para todos os controllers e sensores
 	}
+
 	```
 
 3.  Iniciar a comunicação com o servidor chamando o seguinte método, passando uma **String** com a **senha do usuário**.
