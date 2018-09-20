@@ -30,7 +30,7 @@ bool SaIoTSensor::getReport(){
     }  
 }
 String SaIoTSensor::getByField(String _field){
-    int idxField = jConf.indexOf(_field); 
+    int idxField = jConf.indexOf(_field); //field
 	int init, end;
 	
 	if(idxField != -1){
@@ -71,13 +71,70 @@ void SaIoTSensor::setJsonConfig(String _jsonConfig){
     serial = getByField("serial");
 }
 
-void SaIoTSensor::sendData(double _value){
-    reportMe = 1;
-    return this->sendData(_value,SaIoTCom::getDateNow());
-}
+/*void SaIoTSensor::sendData(double _value){
+    //reportMe = 1;
+    return this->sendData(_value,SaIoTCom::getDateNow()); //requisição http pra cada envio??? Gerenciar hora!
 
+}*/
 void SaIoTSensor::sendData(double _value, String dateTime){
     reportMe = 1;
     value = _value;
     lastDate = dateTime;
 }
+
+//FUNCIONALIDADES FUTURAS
+
+/*void SaIoTSensor::setValue(double _value){
+    value = _value;
+}*/
+
+/*void SaIoTSensor::verify(void){
+    
+    if(deadband != NULL_VALUE){
+        if(exceededDeadband()){
+            sendValue();//usar aqui o ponteiro pra função
+        }
+    }
+    if(timeout != NULL_VALUE){
+        if(exceededTimeout()){
+            sendValue();
+        }
+    }
+    if(resolution != NULL_VALUE){
+        if(exceededResolution()){
+            sendValue();
+        }
+    }
+}
+
+bool SaIoTSensor::exceededDeadband(){
+    bool ret = value>deadband ? true : false;
+    return ret;
+}
+bool SaIoTSensor::exceededTimeout(){
+    unsigned long int currentTime = millis();
+    if(lastTimeout == 0){
+        lastTimeout = currentTime; //equivalente ao start
+        return false;
+    }
+    bool ret = (currentTime - lastTimeout) > timeout ? true : false;
+    return ret;
+}
+bool SaIoTSensor::exceededResolution(){
+ //pensar em como mensurar
+ return false;
+}
+*/
+/*int SaIoTSensor::sendValue(void){ //essa função n existirá, o usuário que vai definir o que acontece. Então chamaria o ponteiro pra função 
+    lastTimeout = millis();
+    //enviar
+    Serial.println("ENVIOU");
+    return 0;
+}
+
+void SaIoTSensor::setTimeout(long int _timeout){
+ timeout = _timeout;
+}
+void SaIoTSensor::setDeadBand(long int _deadband){
+ deadband = _deadband;
+}*/

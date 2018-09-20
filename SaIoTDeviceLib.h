@@ -22,6 +22,9 @@ class SaIoTDeviceLib
 {
 private:
 
+  /*
+    Tudo que for do device deve ser guardado na EEPROM futuramente, pra caso de atualização via OTA 
+  */
   String name;
   String serial;
   String token;
@@ -52,6 +55,11 @@ public:
   int getNControllers();
 
   void addSensor(SaIoTSensor &newSensor);
+  /*void addSensor(String _key, int _deadbandMin, int _deadbandMax, int _timeout, int _resolution, bool _isAcumm, String _label, String _unit);
+  void addSensor(String _key, String _unit);*/
+
   void addController(SaIoTController &newController);
+  /*void addController(String _key, String _type);
+  void addController(String _key, String _type, String _tag, String _description, double _min, double _step, double _max);*/
 };
 #endif
