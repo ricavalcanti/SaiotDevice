@@ -82,12 +82,24 @@ Biblioteca responsável pela comunicação entre dispositivos que usam ESP8266 c
     	//insira aqui o que o device deve fazer ao receber algo nesse tópico
   	}
 	 if(strcmp(topic,(myDevice.getSerial()+mySensor.getKey()).c_str()) == 0){
-        //insira aqui o que o device deve fazer ao receber algo nesse tópico
+      //insira aqui o que o device deve fazer ao receber algo nesse tópico
+			
   	}
 		//inclua outras condições para todos os controllers e sensores
 	}
 	
 	```
+ **OBS.:** Para enviar dados do sensor, a classe **SaIoTSensor** dispõe de dois métodos, ambos recebendo o dado do tipo **double** e uma delas recebendo também a data e hora do dispositivo.
+
+ ```c++
+ 	double valor;
+	String dataHora;
+
+	mySensor.sendData(valor);
+	mySensor.sendData(valor, dataHora);
+ ```
+ Caso opte pela utilização do segundo método. O usuário será responsável pelo controle do tempo de envio. Enquanto no primeiro, a data é sincronizada com o servidor na primeira conexão e gerenciada pelo próprio microcontrolador.
+
 
 3.  Iniciar a comunicação com o servidor chamando o seguinte método, passando uma **String** com a **senha do usuário**.
 
