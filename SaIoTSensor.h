@@ -14,8 +14,9 @@ private:
   String key;
   String serial;
   String lastDate;
-  bool reportMe = 0;
+  bool reportMe;
   double value;
+  String valueStr;
   //Pensar em atributos que vão fora do json de configuração! 
   /*long int deadband = NULL_VALUE,
                     timeout = NULL_VALUE,
@@ -47,12 +48,15 @@ public:
   String getTag(void);
   String getJsonConfig(void);
   String getLastDate(void);
+  String getString(void);
+  String getValueStr(void);
   double getValue(void);
   bool getReport();
 
   void setJsonConfig(String _jConf);
   //void sendData(double _value);
   void sendData(double _value, String dateTime);
+  void sendData(String _value, String dateTime);
   /*void setValue(double _value);
   void setTimeout(long int _timeout);
   void setDeadBand(long int _deadband);*/

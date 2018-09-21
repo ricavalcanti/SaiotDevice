@@ -43,7 +43,14 @@ boolean SaIoTDeviceLib::handleLoop(){
   for(int i=0;i<qtdSensors;i++){
     if(sensors[i]->getReport()){
       String payload =""; //VER COMO FICARIA PRA TRATAR A DATA
-      payload += "{\"token\":\""+token+"\",\"data\":{\"serial\":\""+serial+"\",\"key\":\""+sensors[i]->getKey()+"\",\"value\":" +sensors[i]->getValue()+",\"dateTime\":\""+sensors[i]->getLastDate()+"\"}}";
+      //payload += "{\"token\":\""+token+"\",\"data\":{\"serial\":\""+serial+"\",\"key\":\""+sensors[i]->getKey()+"\",\"value\":";
+      if(sensors[i]->getByField("type") == "number"){
+        payload+= "{\"token\":\""+token+"\",\"data\":{\"serial\":\""+serial+"\",\"key\":\""+sensors[i]->getKey()+"\",\"value\":" + sensors[i]->getValue()+",\"dateTime\":\""+sensors[i]->getLastDate()+"\"}}";
+      }else{
+        payload+= "{\"token\":\""+token+"\",\"data\":{\"serial\":\""+serial+"\",\"key\":\""+sensors[i]->getKey()+"\",\"value\":\"" +sensors[i]->getValueStr()+"\",\"dateTime\":\""+sensors[i]->getLastDate()+"\"}}";
+      }
+      
+      
       if(objCom.publishData(payload)){
         Serial.println("Dado enviado!");
       }else{
